@@ -12,6 +12,7 @@ void menu();
 int main()
 //testi
 //testi commit ja push
+// Toiselta koneelta gitin laitto yms.
 {
 bool gameSession=true;
     menu();
