@@ -1,0 +1,45 @@
+#include "deck.h"
+
+Deck::Deck()
+{
+this->gameDeck=new vector <Card*>();
+createDeck();
+shuffle();
+}
+Deck::~Deck(){
+
+}
+vector<Card*>* Deck::getCards(){
+    return this->gameDeck;
+}
+void Deck::createDeck(){
+    string Face[]{"Ace","TWO","THREE","FOUR","FIVE","SIX","SEVEN","EIGHT","NINE","TEN","JACK","QUEEN","KING"};
+    string Symbol[]{"HEARTS","DIAMONDS", "CLUBS","SPADES"};
+    int Point[]{11,2,3,4,5,6,7,8,9,10,10,10,10};
+
+
+
+    for (int i=0;i<4;i++){
+        for(int j=0;j<13;j++){
+        string Faces=Face[j];
+        string Symbols=Symbol[i];
+        int Points=Point[j];
+
+        Card* c=new Card(Faces,Symbols,Points);
+        gameDeck->push_back(c);
+
+        }
+    }
+}
+
+//Testaamiseen
+void Deck::printCard(int i){
+
+    Card* c = (*gameDeck)[i];
+            cout << c->Face << " of " << c->Symbol << " | " << c->Point << endl;
+}
+void Deck::shuffle()
+{
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::shuffle(this->gameDeck->begin(), this->gameDeck->end(), std::default_random_engine(seed));
+}
