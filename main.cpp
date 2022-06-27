@@ -11,6 +11,7 @@ void menu();
 
 int main()
 //testi
+//testi commit ja push
 {
 bool gameSession=true;
     menu();
