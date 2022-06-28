@@ -147,25 +147,26 @@ void game::hand(Player* player){
 int game::totalPoints(Player* player){
     Player* p=player;
     int points=0;
+    int aces=0;
+    bool ace=false;
 
     for (std::size_t i=0; i < p->hand->size();i++){
         Card* c=(*p->hand)[i];
 
         if(c->Face=="Ace"){
             points=points+11;
-            if(points>21){
-                points=points-11+1;
-            }
-            else{
-                points=points+0;
-            }
-
+            aces+=1;
+            ace=true;
         }
         else{
             points+=c->Point;
         }
     }
-
+    if (ace==true && points>21){
+        for (int i=0; i<aces;i++){
+            points=points-10;
+        }
+    }
 
     return points;
 
@@ -173,23 +174,25 @@ int game::totalPoints(Player* player){
 int game::hitOrStay(){
     int choose;
     bool validNumber=false;
-    while(!validNumber){
     cout<<"Halutko ottaa uuden kortin vai jattaa ottamatta ? \n 1. Uusi kortti |  2. Ela nosta uutta korttia\n";
+    do{
     cin>>choose;
     cout<<endl;
-    if(choose==1){
-        choose=1;
-        validNumber=true;
+  switch (choose){
+  case 1:
+      validNumber=true;
+      break;
+  case 2:
+      validNumber=true;
+      break;
+  default:
+      cout<<"syota vaadittu numero 1 tai 2.\n";
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
-    else if (choose==2){
-        choose=2;
-        validNumber=true;
     }
-    else{
-        cout<<"syota vaadittu numero 1 tai 2.\n";
-    }
-    }
-    return choose;
+    while(validNumber==false);
+return choose;
 }
 
 void game::winningConditions(Player* player,Player* dealer){

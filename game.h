@@ -8,6 +8,7 @@
 #include <chrono>
 #include <random>
 #include <algorithm>
+#include<limits>
 
 class game
 {

@@ -36,25 +36,27 @@ bool gameSession=true;
 }
 
 int newGame(){
-        int choose;
-        bool validNumber=false;
-        while(!validNumber){
-        cout<<"Halutko ottaa uuden eran blackjackkia ?\n\n 1.Kylla | 2. Ei";
-        cin>>choose;
-        cout<<endl;
-        if(choose==1){
-            choose=1;
-            validNumber=true;
-        }
-        else if (choose==2){
-            choose=2;
-            validNumber=true;
-        }
-        else{
-            cout<<"syota vaadittu numero 1 tai 2.\n";
-        }
-        }
-        return choose;
+    int choose;
+    bool validNumber=false;
+    cout<<"Halutko pelata uudestaan ? 1.Kylla / 2.Ei : ";
+    do{
+    cin>>choose;
+    cout<<endl;
+  switch (choose){
+  case 1:
+      validNumber=true;
+      break;
+  case 2:
+      validNumber=true;
+      break;
+  default:
+      cout<<"syota vaadittu numero 1 tai 2.\n";
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+    }
+    while(validNumber==false);
+return choose;
     }
 void gameMenu(){
 
@@ -104,6 +106,8 @@ void menu(){
         }
         else {
             cout<<"Sinun taytyy painaa 1 , 2 tai 3 jatkaaksesi!";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
     }
     while(!startGame);
