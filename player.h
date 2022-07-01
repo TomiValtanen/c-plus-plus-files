@@ -9,10 +9,12 @@ class Player
 {
 public:
     Player(string name , vector <Card*>* hand );
+    Player(string name , vector <Card*>* hand,vector <Card*>* dealerCard);
 
     string name;
-    int totalPoints;
+    int money;
     vector <Card*>* hand;
+    vector <Card*>* dealerCard;
 };
 
 #endif // PLAYER_H
