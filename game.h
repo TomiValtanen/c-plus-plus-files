@@ -25,10 +25,12 @@ public:
     void hand(Player* player);
     int totalPoints(Player* player);
     int hitOrStay();
-    void winningConditions(Player* player,Player* dealer);
+    void winningConditions(Player* player,Player* dealer,int bet);
     void faceDownDealerCard(vector <Card*>* playingCards,Player* player );
     void moveFaceDownCard(Player* dealer);
     bool checkBlackjack(Player* player );
+    int betAmountCheck(Player* player);
+    void money(bool win , int bet,Player* player);
 
 
 };

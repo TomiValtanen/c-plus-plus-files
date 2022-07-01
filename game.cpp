@@ -32,8 +32,9 @@ void game::startGame(Player* player, Player* dealer, Deck* deck){
     vector <Card*>* playingCards= d->getCards();
 
     cout<<"Sinulla on rahaa "<<player->money<<" euroa\n";
-    cout<<"Osallistumis maksu on 10 euroa\n\n";
-    player->money=player->money-10;
+    cout<<"Pienin osallistumis maksu on 10 euroa ja suurin 100 euroa.\nPaljonko tahdot panostaa?\n";
+    int bet=betAmountCheck(player);
+
 
     pickCard(playingCards,player,2);
     pickCard(playingCards,dealer,1);
@@ -44,7 +45,9 @@ void game::startGame(Player* player, Player* dealer, Deck* deck){
     showHands(player,dealer);
     bool blackjack=checkBlackjack(player);
     if (blackjack==true){
-        cout<<"Sinä sait blackjackin ja voitit!\n\n";
+        cout<<"Sinä sait blackjackin ja voitit"<< bet+bet*1.5 <<" \n\n";
+        player->money+=bet+bet*1.5;
+
     }
 
     else{
@@ -105,13 +108,23 @@ void game::startGame(Player* player, Player* dealer, Deck* deck){
             showHands(player,dealer);
         }
     }
-    if (dealerOverLimit==true || playerOverLimit==true){
-        cout << "\n \nPaina Enter jatkaaksesi.";
+    if (dealerOverLimit==true){
+        bool win=true;
+        money(win,bet,player);
+        cout<<"Voitit"<< bet+bet<<" !\nPaina Enter jatkaaksesi.";
+        cin.ignore();
+        cin.ignore();
+
+    }
+    else if(playerOverLimit==true){
+        bool win=false;
+        money(win,bet,player);
+        cout<<"Havisit "<< bet << " !\nPaina Enter jatkaaksesi.";
         cin.ignore();
         cin.ignore();
     }
     else{
-        winningConditions(player,dealer);
+        winningConditions(player,dealer,bet);
         cout << "\n \nPaina Enter jatkaaksesi.";
         cin.ignore();
         cin.ignore();
@@ -121,7 +134,8 @@ void game::startGame(Player* player, Player* dealer, Deck* deck){
     }
 
 
-    if(player->money>0){
+    if(player->money>=10){
+        cout<<"Voi harmi sinulla ei ole enaa rahaa seuraavalle kierrokselle vahimmaismaara panostukselle on 10 euroa. Sinulla on "<< player->money<<"\n\n";
         delete dealer;
         delete d;
         player->hand->clear();
@@ -131,8 +145,10 @@ void game::startGame(Player* player, Player* dealer, Deck* deck){
         vector <Card*>* dealerCard=new vector <Card*>();
         Player* dealer1= new Player(dealerName,dealerHand,dealerCard);
         startGame(player,dealer1,deck1);}
-
-
+else{
+ cout<<"Voi harmi sinulla ei ole enaa rahaa seuraavalle kierrokselle vahimmaismaara panostukselle on 10 euroa. Sinulla on "<< player->money<<" euroa.\n\n";
+ sleep(2);
+}
 }
 
 void game::pickCard(vector <Card*>* playingCards,Player* player , int numberOfCards){
@@ -236,38 +252,52 @@ int game::hitOrStay(){
 return choose;
 }
 
-void game::winningConditions(Player* player,Player* dealer){
+void game::winningConditions(Player* player,Player* dealer, int bet){
     int dp=totalPoints(dealer);
     int pp=totalPoints(player);
+    int b=bet;
+    bool win;
     system("cls");
     if(dp>21){
+        win=true;
         showHands(player,dealer);
-            cout<<"Sina voitit!";
+        money(win,b,player);
+            cout<<"Sina voitit "<<bet + bet <<" euroa!";
             cout<<"\n\n\n======================================================\n\n\n";
         }
     else if(pp>21){
+        win=false;
         showHands(player,dealer);
-        cout<<"Jakaja voitti!";
+        money(win,b,player);
+        cout<<"Jakaja voittija sinä hävisit"<< bet << " euroa";
         cout<<"\n\n\n======================================================\n\n\n";
     }
     else if(dp>pp && dp<=21){
+        win=false;
         showHands(player,dealer);
-        cout<<"Jakaja Voitti!";
+        money(win,b,player);
+        cout<<"Jakaja voittija sinä hävisit "<< bet << " euroa";
         cout<<"\n\n\n======================================================\n\n\n";
     }
     else if(dp<pp && pp<=21){
+        win=true;
         showHands(player,dealer);
-        cout<<"Sina Voitit!";
+        money(win,b,player);
+        cout<<"Sina voitit "<<bet + bet <<" euroa!";
         cout<<"\n\n\n======================================================\n\n\n";
     }
     else if(dp==pp && pp<21){
+        win=false;
         showHands(player,dealer);
-        cout<<"Jakaja voitti!";
+        money(win,b,player);
+        cout<<"Jakaja voittija sinä hävisit "<< bet << " euroa";
         cout<<"\n\n\n======================================================\n\n\n";
     }
     else if(dp==pp && pp==21){
+        win=false;
         showHands(player,dealer);
-        cout<<"Jakaja voitti!";
+        money(win,b,player);
+        cout<<"Jakaja voittija sinä hävisit "<< bet << " euroa";
         cout<<"\n\n\n======================================================\n\n\n";
     }
 }
@@ -283,8 +313,41 @@ bool game::checkBlackjack(Player* player ){
     }
     return blackjack;
 }
+int game::betAmountCheck(Player* player){
+    Player* p=player;
+    int  bet;
+    bool validNumber=false;
+    cout<<"Kirjoita panoksesi :";
+    do{
+    cin>>bet;
+    if(bet<10 || bet>100){
+        cout<<"Pienin mahdollinen panostus on 10 euroa ja suurin mahdollinen 100 euroa!";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+    else if (bet > p->money){
+        cout<<"Sinulla ei ole noin paljon rahaa! Sinulla on rahaa "<<p->money<<"\n";
+    }
+    else {
+        validNumber=true;
+    }
+    }
+    while(validNumber==false);
+    return bet;
+}
 
+void game::money(bool win , int bet, Player* player){
+Player* p=player;
+bool w=win;
+int b=bet;
 
+if(w==true){
+    p->money+=b*2;
+}
+else {
+    p->money-=b;
+}
+}
 
 
 
