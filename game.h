@@ -9,6 +9,10 @@
 #include <random>
 #include <algorithm>
 #include<limits>
+#include <cstdlib>
+#include <unistd.h>
+
+
 
 class game
 {
@@ -22,6 +26,9 @@ public:
     int totalPoints(Player* player);
     int hitOrStay();
     void winningConditions(Player* player,Player* dealer);
+    void faceDownDealerCard(vector <Card*>* playingCards,Player* player );
+    void moveFaceDownCard(Player* dealer);
+    bool checkBlackjack(Player* player );
 
 
 };

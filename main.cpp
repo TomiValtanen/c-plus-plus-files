@@ -10,9 +10,6 @@ void menu();
 
 
 int main()
-//testi
-//testi commit ja push
-// Toiselta koneelta gitin laitto yms.
 {
 bool gameSession=true;
     menu();
@@ -36,6 +33,7 @@ bool gameSession=true;
 }
 
 int newGame(){
+
     int choose;
     bool validNumber=false;
     cout<<"Halutko pelata uudestaan ? 1.Kylla / 2.Ei : ";
