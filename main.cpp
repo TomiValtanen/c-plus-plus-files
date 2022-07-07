@@ -13,15 +13,17 @@ int main()
 {
 bool gameSession=true;
     menu();
-    game* startGame;
-    startGame=new game();
+    game* startGame=new game();
+
     delete startGame;
+
     do{
     int continueGame=newGame();
-    if(continueGame==1){
-        game* Game;
 
-        Game= new game();
+    if(continueGame==1){
+
+        game* Game=new game();
+
         delete Game;
     }
     else{

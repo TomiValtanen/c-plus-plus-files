@@ -31,6 +31,10 @@ public:
     bool checkBlackjack(Player* player );
     int betAmountCheck(Player* player);
     void money(bool win , int bet,Player* player);
+    bool playerTurn(vector <Card*>* playingCards , Player* player,Player* dealer);
+    bool dealerTurn(bool PlayerOverlimit,vector <Card*>* playingCards , Player* player,Player* dealer);
+    void busted(bool dealerOverLimit,bool playerOverLimit, int bet, Player* player, Player* dealer);
+    void nextTurn(Player* player, Player* dealer,Deck* d);
 
 
 };
