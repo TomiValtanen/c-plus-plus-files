@@ -10,11 +10,15 @@ class Player
 public:
     Player(string name , vector <Card*>* hand );
     Player(string name , vector <Card*>* hand,vector <Card*>* dealerCard);
+    void setMoney(int bet);
+    int getMoney();
 
     string name;
-    int money;
+
     vector <Card*>* hand;
     vector <Card*>* dealerCard;
+private:
+    int money;
 };
 
 #endif // PLAYER_H

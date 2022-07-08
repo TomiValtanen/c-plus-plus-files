@@ -32,7 +32,8 @@ void game::startGame(Player* player, Player* dealer, Deck* deck){
     vector <Card*>* playingCards= d->getCards();
 
 
-    cout<<"Sinulla on rahaa "<< player->money <<" euroa\n";
+
+    cout<<"Sinulla on rahaa "<< player->getMoney() <<" euroa\n";
     cout<<"Pienin osallistumis maksu on 10 euroa ja suurin 100 euroa.\nPaljonko tahdot panostaa?\n";
     int bet=betAmountCheck(player);
 
@@ -44,20 +45,46 @@ void game::startGame(Player* player, Player* dealer, Deck* deck){
     faceDownDealerCard(playingCards,dealer);
 
     showHands(player,dealer);
-    //Tarkistaa onko pelaajalla Blackjack
+    //Tarkistaa onko pelaajalla tai jakalla Blackjack.
     bool blackjack=checkBlackjack(player);
     if (blackjack==true){
-        player->money+=bet*1.5;
-        cout<<"Sinä sait blackjackin ja voitit"<< bet+bet*1.5 <<" \n\n";
+       moveFaceDownCard(dealer);
+       bool blackjackDealer=checkBlackjack(dealer);
+       showHands(player, dealer);
+
+       if(blackjack==true && blackjackDealer==true){
+           cout<<"Tasapeli molemmilla on BlackJack!\nVoitit "<<bet*2;
+           player->setMoney(bet);
+           cout << "\n \nPaina Enter jatkaaksesi.";
+           cin.ignore();
+           cin.ignore();
+          }
+               else {
+
+
+        cout<<"Sinä sait blackjackin ja voitit "<< bet+bet*1.5 <<" \n\n";
+        int bj=bet*1.5;
+        player->setMoney(bj);
+        cout << "\n \nPaina Enter jatkaaksesi.";
+        cin.ignore();
+        cin.ignore();
+
+    }
     }
 
     else{
+
         //Nostetaan kortteja sen verran ,että "Bust" tai pelaaja päättää itse lopettaa korttien nostamisen. Palauttaa arvon true / false.
         bool playerOverLimit=playerTurn(playingCards,player,dealer);
 
+        //Pelaajan ottamien korttien jälkeen annetaan mahdollisuus ottaa insurance , jos jakajalla on nakyva kortti assa.
+        bool insu=checkInsurance(dealer);
+        bool insuBlackJack=insurance(insu,bet,dealer,player);
 
 
-        if(playerOverLimit==false){
+
+        //Jakaja aloittaa korttien ottamisen , jos blackjackkia ei ollut tai pelaajan ei bustannut.
+        if(playerOverLimit==false&& insuBlackJack==false){
 
          // näyttää jakajan toisen kortin ja siirtää sen jakajan käteen.
             moveFaceDownCard(dealer);
@@ -70,12 +97,12 @@ void game::startGame(Player* player, Player* dealer, Deck* deck){
     }
 
     //Tarkistetaan onko pelaajalla kyseistä summaa rahaa osallistua seuraavalle kierrokselle.
-    if(player->money>=10){
+    if(player->getMoney()>=10){
 
     nextTurn(player, dealer, d);
     }
     else{
-        cout<<"Voi harmi sinulla ei ole enaa rahaa seuraavalle kierrokselle vahimmaismaara panostukselle on 10 euroa. Sinulla on "<< player->money<<" euroa.\n\n";
+        cout<<"Voi harmi sinulla ei ole enaa rahaa seuraavalle kierrokselle vahimmaismaara panostukselle on 10 euroa. Sinulla on "<< player->getMoney()<<" euroa.\n\n";
         sleep(2);
     }
 }
@@ -107,6 +134,7 @@ void game::moveFaceDownCard(Player* dealer){
     system ("cls");
     Card* c =Dealer->dealerCard->front();
     Dealer->hand->push_back(c);
+    delete c;
     delete Dealer->dealerCard;
 }
 
@@ -157,10 +185,17 @@ int game::totalPoints(Player* player){
     return points;
 
 }
-int game::hitOrStay(){
+int game::yesOrNo(bool Insurance){
     int choose;
     bool validNumber=false;
+    bool insurance=Insurance;
+    if(insurance==true){
+        cout<<"Halutko ottaa insurancen ? \n 1. Kylla |  2. En\n";
+    }
+    else{
+
     cout<<"Halutko ottaa uuden kortin vai jattaa ottamatta ? \n 1. Uusi kortti |  2. Ela nosta uutta korttia\n";
+    }
     do{
         cin>>choose;
         cout<<endl;
@@ -254,8 +289,8 @@ int game::betAmountCheck(Player* player){
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
-        else if (bet > p->money){
-            cout<<"Sinulla ei ole noin paljon rahaa! Sinulla on rahaa "<<p->money<<"\n";
+        else if (bet > p->getMoney()){
+            cout<<"Sinulla ei ole noin paljon rahaa! Sinulla on rahaa "<<p->getMoney()<<"\n";
         }
         else {
             validNumber=true;
@@ -271,10 +306,10 @@ void game::money(bool win , int bet, Player* player){
     int b=bet;
 
     if(w==true){
-        p->money+=b;
+        p->setMoney(b);
     }
     else {
-        p->money-=b;
+        p->setMoney(-b);
     }
 }
 
@@ -283,7 +318,7 @@ bool game::playerTurn(vector <Card*>* playingCards , Player* player,Player* deal
     bool playerTurn=true;
     do{
 
-        int hit=hitOrStay();
+        int hit=yesOrNo(false);
 
         if(hit==1){
             system("cls");
@@ -371,8 +406,54 @@ void game::nextTurn(Player* player, Player* dealer,Deck* d){
     Player* Dealer= new Player(dealerName,dealerHand,dealerCard);
     startGame(player,Dealer,deck);
 }
+bool game::checkInsurance(Player* dealer){
+   bool insurance=false;
+   Player* d=dealer;
+   Card* c= (*d->hand)[0];
 
+   if(c->Face=="Ace"){
+       insurance=true;
+   }
+   return insurance;
+}
 
+bool game::insurance(bool Insurance, int bet, Player* dealer, Player* player){
+    bool insurance=Insurance;
+    bool blackjackDealer=false;
+    int insuranceBet=bet/2;
+    if(insurance==true){
+
+        cout<<"Jakajalla on nakyva kortti assa haluatko ottaa insurancen ja katsoa onko toinen kortti 10? \nOlet antanut talle kierrokselle "<< bet << " euron panoksen. \nInsurance on puolet antamastasi panoksesta "<< bet/2<<" euroa.";
+        int chooce=yesOrNo(insurance);
+        if(chooce==1){
+           moveFaceDownCard(dealer);
+           showHands(player,dealer);
+            blackjackDealer=checkBlackjack(dealer);
+           if(blackjackDealer==true){
+               bool win=true;
+               cout<<"Jakajalla on toinen kortti 10 arvoinen eli jakajalla on blackjack. Insurancelle asettamasi panos oli"<< insuranceBet <<" euroa.\nSaat taman tuplattuna takaisin "<<bet<<" euroa.";
+               money(win,bet,player);
+               cout << "\n \nPaina Enter jatkaaksesi.";
+               cin.ignore();
+               cin.ignore();
+           }
+           else{
+               bool win=false;
+               cout<<"Jakajan toinen kortti ei ollut 10, joten hävisit"<< bet/2 <<" euron insurancen.";
+               money(win,insuranceBet,player);
+               cout << "\n \nPaina Enter jatkaaksesi.";
+               cin.ignore();
+               cin.ignore();
+
+        }
+    }
+        else{
+            blackjackDealer=false;
+        }
+}
+
+    return blackjackDealer;
+}
 
 
 

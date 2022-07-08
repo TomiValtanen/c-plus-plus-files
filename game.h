@@ -24,7 +24,7 @@ public:
     void showHands(Player* player, Player* dealer);
     void hand(Player* player);
     int totalPoints(Player* player);
-    int hitOrStay();
+    int yesOrNo(bool Insurance);
     void winningConditions(Player* player,Player* dealer,int bet);
     void faceDownDealerCard(vector <Card*>* playingCards,Player* player );
     void moveFaceDownCard(Player* dealer);
@@ -35,6 +35,8 @@ public:
     bool dealerTurn(bool PlayerOverlimit,vector <Card*>* playingCards , Player* player,Player* dealer);
     void busted(bool dealerOverLimit,bool playerOverLimit, int bet, Player* player, Player* dealer);
     void nextTurn(Player* player, Player* dealer,Deck* d);
+    bool checkInsurance(Player* dealer);
+    bool insurance(bool Insurance, int bet, Player* dealer, Player* player);
 
 
 };
