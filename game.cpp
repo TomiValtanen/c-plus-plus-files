@@ -73,6 +73,7 @@ void game::startGame(Player* player, Player* dealer, Deck* deck){
     }
 
     else{
+
         //Double down ensimmäisten kahden kortin summa on 9 , 10 tai 11.
         bool doubleCheck=doubleDown(player,dealer,bet,playingCards);
         if(doubleCheck==true){
@@ -105,7 +106,7 @@ void game::startGame(Player* player, Player* dealer, Deck* deck){
         busted(dealerOverLimit,playerOverLimit,bet,player,dealer);
 
     }
-
+}
     //Tarkistetaan onko pelaajalla kyseistä summaa rahaa osallistua seuraavalle kierrokselle.
     if(player->getMoney()>=10){
 
@@ -115,9 +116,9 @@ void game::startGame(Player* player, Player* dealer, Deck* deck){
         cout<<"Voi harmi sinulla ei ole enaa rahaa seuraavalle kierrokselle vahimmaismaara panostukselle on 10 euroa. Sinulla on "<< player->getMoney()<<" euroa.\n\n";
         sleep(2);
     }
-}
-}
 
+
+}
 void game::pickCard(vector <Card*>* playingCards,Player* player , int numberOfCards){
 
     int number=numberOfCards;
