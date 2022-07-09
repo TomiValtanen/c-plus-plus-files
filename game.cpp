@@ -73,6 +73,18 @@ void game::startGame(Player* player, Player* dealer, Deck* deck){
     }
 
     else{
+        //Double down ensimmäisten kahden kortin summa on 9 , 10 tai 11.
+        bool doubleCheck=doubleDown(player,dealer,bet,playingCards);
+        if(doubleCheck==true){
+        int doubleBet=bet*2;
+         moveFaceDownCard(dealer);
+         //Jakaja nostaa kortteja siihen asti ,että kädessä on 17+ korttien arvo tai "Bust".
+         bool dealerOverLimit=dealerTurn(false,playingCards,player,dealer);
+         //Tarkistaa onko kumpikaan jakaja tai pelaaja "Bust" , jos ei niin tavallisten sääntöjen mukaan kumpi voittaa kierroksen.
+         busted(dealerOverLimit,false,doubleBet,player,dealer);
+
+        }
+        else{
 
         //Nostetaan kortteja sen verran ,että "Bust" tai pelaaja päättää itse lopettaa korttien nostamisen. Palauttaa arvon true / false.
         bool playerOverLimit=playerTurn(playingCards,player,dealer);
@@ -80,8 +92,6 @@ void game::startGame(Player* player, Player* dealer, Deck* deck){
         //Pelaajan ottamien korttien jälkeen annetaan mahdollisuus ottaa insurance , jos jakajalla on nakyva kortti assa.
         bool insu=checkInsurance(dealer);
         bool insuBlackJack=insurance(insu,bet,dealer,player);
-
-
 
         //Jakaja aloittaa korttien ottamisen , jos blackjackkia ei ollut tai pelaajan ei bustannut.
         if(playerOverLimit==false&& insuBlackJack==false){
@@ -105,6 +115,7 @@ void game::startGame(Player* player, Player* dealer, Deck* deck){
         cout<<"Voi harmi sinulla ei ole enaa rahaa seuraavalle kierrokselle vahimmaismaara panostukselle on 10 euroa. Sinulla on "<< player->getMoney()<<" euroa.\n\n";
         sleep(2);
     }
+}
 }
 
 void game::pickCard(vector <Card*>* playingCards,Player* player , int numberOfCards){
@@ -185,11 +196,16 @@ int game::totalPoints(Player* player){
     return points;
 
 }
-int game::yesOrNo(bool Insurance){
+int game::yesOrNo (bool Insurance, bool DoubleBet){
     int choose;
     bool validNumber=false;
     bool insurance=Insurance;
-    if(insurance==true){
+    bool doubleBet=DoubleBet;
+
+    if(doubleBet==true){
+        cout<<"Haluatko double down? \n 1. Kylla |  2. En\n";
+    }
+    else if(insurance==true){
         cout<<"Halutko ottaa insurancen ? \n 1. Kylla |  2. En\n";
     }
     else{
@@ -318,7 +334,7 @@ bool game::playerTurn(vector <Card*>* playingCards , Player* player,Player* deal
     bool playerTurn=true;
     do{
 
-        int hit=yesOrNo(false);
+        int hit=yesOrNo(false,false);
 
         if(hit==1){
             system("cls");
@@ -424,7 +440,7 @@ bool game::insurance(bool Insurance, int bet, Player* dealer, Player* player){
     if(insurance==true){
 
         cout<<"Jakajalla on nakyva kortti assa haluatko ottaa insurancen ja katsoa onko toinen kortti 10? \nOlet antanut talle kierrokselle "<< bet << " euron panoksen. \nInsurance on puolet antamastasi panoksesta "<< bet/2<<" euroa.";
-        int chooce=yesOrNo(insurance);
+        int chooce=yesOrNo(insurance,false);
         if(chooce==1){
            moveFaceDownCard(dealer);
            showHands(player,dealer);
@@ -453,6 +469,33 @@ bool game::insurance(bool Insurance, int bet, Player* dealer, Player* player){
 }
 
     return blackjackDealer;
+}
+
+bool game::doubleDown(Player* player,Player* dealer,int bet,vector <Card*>* playingCards ){
+
+    bool doubleDown=false;
+    if(totalPoints(player)<=11&&totalPoints(player)>=9){
+
+       int chooce=yesOrNo(false,true);
+       if(chooce==1){
+           cout<<"Olet laittanut panokseksi "<<bet<<" euroa. Olet laittamassa tuplana alkuperaisen panoksesi.";
+           int doubleBet=bet*2;
+           if(player->getMoney()>=doubleBet){
+               cout<<"Sinulla on tarpeeksi rahaa tehdä double down. Jakaja jakaa sinulle nyt viimeisen kortin.";
+               pickCard(playingCards,player,1);
+               showHands(player,dealer);
+               doubleDown=true;
+           }
+           else{
+               cout<<"Sinulla ei ole tarpeeksi rahaa double down, mutta voit jatkaa normaalisti korttien ottamista.";
+               doubleDown=false;
+           }
+       }
+    else{
+        doubleDown=false;
+    }
+    }
+    return doubleDown;
 }
 
 
