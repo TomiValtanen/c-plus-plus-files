@@ -148,7 +148,6 @@ void game::moveFaceDownCard(Player* dealer){
     system ("cls");
     Card* c =Dealer->dealerCard->front();
     Dealer->hand->push_back(c);
-    delete c;
     delete Dealer->dealerCard;
 }
 
