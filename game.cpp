@@ -73,57 +73,16 @@ void game::startGame(Player* player, Player* dealer, Deck* deck){
     }
 
     else{
-        //split silloinku kortit ovat samat.
-        Player* p=player;
-        Card* c=(*p->hand)[0];
-        Card* c1=(*p->hand)[1];
-        vector <Card*>* d= playingCards;
-        if(c->Face==c1->Face){
-            vector <Card*>* splitHand=new vector <Card*>();
-            splitHand->push_back(c);
-            p->hand->erase(p->hand->begin());
-            delete c1;
-            cout << p->name <<"n kortit ovat splitkadessa 1: \n" << endl;
-            for(std::size_t i = 0; i < p->hand->size(); ++i){
-                Card* c= (*p->hand)[i];
-                Card* c1 =(*splitHand)[i];
-
-                cout << c->Face << " of " << c->Symbol <<"  | ";
-                cout << p->name <<"n kortit ovat splitkadessa 2: \n" << endl;
-                cout << c1->Face << " of " << c1->Symbol <<"  | ";
-                cout<<"Jaetaan molempiin kasiin toiset kortit.";
-            }
-                for(int i=0; i<1;i++){
-                    Card* c=d->front();
-                    p->hand->push_back(c);
-                    d->erase(d->begin());
-
-                }
-                for(int i=0; i<1;i++){
-                    Card* c=d->front();
-                    splitHand->push_back(c);
-                    d->erase(d->begin());
-                }
-                system("cls");
-                cout << p->name <<"n kortit ovat splitkadessa 1: \n" << endl;
-                for(std::size_t i = 0; i < p->hand->size(); ++i){
-                    Card* c= (*p->hand)[i];
-                    cout << c->Face << " of " << c->Symbol <<"  | ";
-
-
-            }
-                cout << p->name <<"n kortit ovat splitkadessa 2: \n" << endl;
-                for(std::size_t i = 0; i < splitHand->size(); ++i){
-                    Card* c1 =(*splitHand)[i];
-                    cout << c1->Face << " of " << c1->Symbol <<"  | ";
-
-
-        }
-        }
-
         //Pelaajan ottamien korttien jälkeen annetaan mahdollisuus ottaa insurance , jos jakajalla on nakyva kortti assa.
         bool insu=checkInsurance(dealer);
         bool insuBlackJack=insurance(insu,bet,dealer,player);
+
+        bool split=splitCheck(player,insuBlackJack);
+        splittingHand(player,dealer,playingCards,bet,split);
+
+
+
+
 
         //Double down ensimmäisten kahden kortin summa on 9 , 10 tai 11.
         bool doubleCheck=doubleDown(player,dealer,bet,playingCards,insuBlackJack);
@@ -199,13 +158,27 @@ void game::moveFaceDownCard(Player* dealer){
 }
 
 void game::showHands(Player* player, Player* dealer){
-
     hand(player);
     cout<<"\n\nKokonaispisteet :"<<totalPoints(player)<<"\n\n";
     cout<<"\n==================================\n";
 
     hand(dealer);
     cout<<"\n\nKokonaispisteet :"<<totalPoints(dealer)<<"\n\n";
+
+}
+void game::showSplitHands(Player* player, Player* dealer, vector <Card*>* splithand){
+
+        hand(player);
+        cout<<"\n\nKokonaispisteet :"<<totalPoints(player)<<"\n\n";
+        cout<<"\n==================================\n";
+
+        splitHand(player, splithand);
+        cout<<"\n\nKokonaispisteet :"<<splitTotalPoints(splithand)<<"\n\n";
+        cout<<"\n==================================\n";
+
+        hand(dealer);
+        cout<<"\n\nKokonaispisteet :"<<totalPoints(dealer)<<"\n\n";
+
 }
 void game::hand(Player* player){
     Player* p=player;
@@ -213,6 +186,17 @@ void game::hand(Player* player){
     cout << p->name <<"n kortit ovat : \n" << endl;
     for(std::size_t i = 0; i < p->hand->size(); ++i){
         Card* c= (*p->hand)[i];
+
+        cout << c->Face << " of " << c->Symbol <<"  | ";
+
+    }
+}
+void game::splitHand(Player* player, vector <Card*>* splithand){
+    Player* p=player;
+
+    cout << p->name <<"n kortit ovat : \n" << endl;
+    for(std::size_t i = 0; i < splithand->size(); ++i){
+        Card* c= (*splithand)[i];
 
         cout << c->Face << " of " << c->Symbol <<"  | ";
 
@@ -245,13 +229,43 @@ int game::totalPoints(Player* player){
     return points;
 
 }
-int game::yesOrNo (bool Insurance, bool DoubleBet){
+int game::splitTotalPoints( vector <Card*>* splithand){
+    int points=0;
+    int aces=0;
+    bool ace=false;
+
+    for (std::size_t i=0; i < splithand->size();i++){
+        Card* c=(*splithand)[i];
+
+        if(c->Face=="Ace"){
+            points=points+11;
+            aces+=1;
+            ace=true;
+        }
+        else{
+            points+=c->Point;
+        }
+    }
+    if (ace==true && points>21){
+        for (int i=0; i<aces;i++){
+            points=points-10;
+        }
+    }
+
+    return points;
+
+}
+int game::yesOrNo (bool Insurance, bool DoubleBet, bool Split){
     int choose;
     bool validNumber=false;
     bool insurance=Insurance;
     bool doubleBet=DoubleBet;
+    bool split=Split;
 
-    if(doubleBet==true){
+    if (split==true){
+        cout<<"Haluatko ottaa split? \n 1. Kylla |  2. En\n";
+    }
+    else if(doubleBet==true){
         cout<<"Haluatko double down? \n 1. Kylla |  2. En\n";
     }
     else if(insurance==true){
@@ -383,7 +397,7 @@ bool game::playerTurn(vector <Card*>* playingCards , Player* player,Player* deal
     bool playerTurn=true;
     do{
 
-        int hit=yesOrNo(false,false);
+        int hit=yesOrNo(false,false,false);
 
         if(hit==1){
             system("cls");
@@ -492,7 +506,7 @@ bool game::insurance(bool Insurance, int bet, Player* dealer, Player* player){
     if(insurance==true){
 
         cout<<"Jakajalla on nakyva kortti assa haluatko ottaa insurancen ja katsoa onko toinen kortti 10? \nOlet antanut talle kierrokselle "<< bet << " euron panoksen. \nInsurance on puolet antamastasi panoksesta "<< bet/2<<" euroa.";
-        int chooce=yesOrNo(insurance,false);
+        int chooce=yesOrNo(insurance,false,false);
         if(chooce==1 && player->getMoney()>=checkMoney){
            Player* d= dealer;
            Card* c= (*d->dealerCard)[0];
@@ -546,7 +560,7 @@ bool game::doubleDown(Player* player,Player* dealer,int bet,vector <Card*>* play
     bool doubleDown=false;
     if(totalPoints(player)<=11&&totalPoints(player)>=9 && blackjack==false){
 
-       int chooce=yesOrNo(false,true);
+       int chooce=yesOrNo(false,true,false);
        if(chooce==1){
            cout<<"Olet laittanut panokseksi "<<bet<<" euroa. Olet laittamassa tuplana alkuperaisen panoksesi.";
            int doubleBet=bet*2;
@@ -568,9 +582,61 @@ bool game::doubleDown(Player* player,Player* dealer,int bet,vector <Card*>* play
     return doubleDown;
 }
 
+bool game::splitCheck(Player* player,bool blackjack){
+    //split silloinku kortit ovat samat.
+    Player* p=player;
+    Card* c=(*p->hand)[0];
+    Card* c1=(*p->hand)[1];
 
+    bool split=false;
 
+    //Split tapahtuu kun if on totta.
+    if(c->Face==c1->Face && blackjack==false){
+    int chooce=yesOrNo(false,false,true);
+    if(chooce==1){
+        split=true;
+    }
+}
+    return split;
+}
 
+void game::splittingHand(Player* player, Player* dealer,vector <Card*>* playingCards, int bet,bool Split){
+    //split silloinku kortit ovat samat.
+    Player* p=player;
+    Card* c=(*p->hand)[0];
+    vector <Card*>* d= playingCards;
+    bool split=Split;
+
+    //Split tapahtuu kun if on totta.
+    if(split==true){
+        vector <Card*>* splitHand=new vector <Card*>();
+        splitHand->push_back(c);
+        p->hand->erase(p->hand->begin());
+
+        // kaksi erillistä katta.
+        cout << p->name <<"n kortit ovat splitkadessa 1: \n" << endl;
+        for(std::size_t i = 0; i < p->hand->size(); ++i){
+            Card* c= (*p->hand)[i];
+            Card* c1 =(*splitHand)[i];
+
+            cout << c->Face << " of " << c->Symbol <<"  | \n";
+            cout << p->name <<"n kortit ovat splitkadessa 2: \n" << endl;
+            cout << c1->Face << " of " << c1->Symbol <<"  | \n";
+            cout<<"Jaetaan molempiin kasiin toiset kortit.";
+        }
+        // nostetaan toiset kortit.
+        pickCard(playingCards,player,1);
+
+            // nostetaan toiset kortit.
+            for(int i=0; i<1;i++){
+                Card* c=d->front();
+                splitHand->push_back(c);
+                d->erase(d->begin());
+            }
+            system("cls");
+            showSplitHands(player,dealer,splitHand);
+    }
+}
 
 
 

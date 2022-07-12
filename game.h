@@ -24,7 +24,7 @@ public:
     void showHands(Player* player, Player* dealer);
     void hand(Player* player);
     int totalPoints(Player* player);
-    int yesOrNo(bool Insurance , bool DoubleBet);
+    int yesOrNo(bool Insurance , bool DoubleBet,bool split);
     void winningConditions(Player* player,Player* dealer,int bet);
     void faceDownDealerCard(vector <Card*>* playingCards,Player* player );
     void moveFaceDownCard(Player* dealer);
@@ -38,6 +38,11 @@ public:
     bool checkInsurance(Player* dealer);
     bool insurance(bool Insurance, int bet, Player* dealer, Player* player);
     bool doubleDown(Player* player,Player* dealer,int bet,vector <Card*>* playingCards, bool blackjack);
+    bool splitCheck(Player* player,bool blackjack);
+    void splittingHand(Player* player, Player* dealer,vector <Card*>* playingCards, int bet,bool Split);
+    void splitHand(Player* player, vector <Card*>* splitHand);
+    void showSplitHands(Player* player, Player* dealer, vector <Card*>* splitHand);
+    int  splitTotalPoints( vector <Card*>* splithand);
 
 
 };
