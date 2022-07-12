@@ -73,22 +73,69 @@ void game::startGame(Player* player, Player* dealer, Deck* deck){
     }
 
     else{
+        //split silloinku kortit ovat samat.
+        Player* p=player;
+        Card* c=(*p->hand)[0];
+        Card* c1=(*p->hand)[1];
+        vector <Card*>* d= playingCards;
+        if(c->Face==c1->Face){
+            vector <Card*>* splitHand=new vector <Card*>();
+            splitHand->push_back(c);
+            p->hand->erase(p->hand->begin());
+            delete c1;
+            cout << p->name <<"n kortit ovat splitkadessa 1: \n" << endl;
+            for(std::size_t i = 0; i < p->hand->size(); ++i){
+                Card* c= (*p->hand)[i];
+                Card* c1 =(*splitHand)[i];
+
+                cout << c->Face << " of " << c->Symbol <<"  | ";
+                cout << p->name <<"n kortit ovat splitkadessa 2: \n" << endl;
+                cout << c1->Face << " of " << c1->Symbol <<"  | ";
+                cout<<"Jaetaan molempiin kasiin toiset kortit.";
+            }
+                for(int i=0; i<1;i++){
+                    Card* c=d->front();
+                    p->hand->push_back(c);
+                    d->erase(d->begin());
+
+                }
+                for(int i=0; i<1;i++){
+                    Card* c=d->front();
+                    splitHand->push_back(c);
+                    d->erase(d->begin());
+                }
+                system("cls");
+                cout << p->name <<"n kortit ovat splitkadessa 1: \n" << endl;
+                for(std::size_t i = 0; i < p->hand->size(); ++i){
+                    Card* c= (*p->hand)[i];
+                    cout << c->Face << " of " << c->Symbol <<"  | ";
+
+
+            }
+                cout << p->name <<"n kortit ovat splitkadessa 2: \n" << endl;
+                for(std::size_t i = 0; i < splitHand->size(); ++i){
+                    Card* c1 =(*splitHand)[i];
+                    cout << c1->Face << " of " << c1->Symbol <<"  | ";
+
+
+        }
+        }
 
         //Pelaajan ottamien korttien jälkeen annetaan mahdollisuus ottaa insurance , jos jakajalla on nakyva kortti assa.
         bool insu=checkInsurance(dealer);
         bool insuBlackJack=insurance(insu,bet,dealer,player);
 
         //Double down ensimmäisten kahden kortin summa on 9 , 10 tai 11.
-        bool doubleCheck=doubleDown(player,dealer,bet,playingCards);
-        if(doubleCheck==true && insuBlackJack==false){
+        bool doubleCheck=doubleDown(player,dealer,bet,playingCards,insuBlackJack);
+        if(doubleCheck==true){
         int doubleBet=bet*2;
          moveFaceDownCard(dealer);
          //Jakaja nostaa kortteja siihen asti ,että kädessä on 17+ korttien arvo tai "Bust".
          bool dealerOverLimit=dealerTurn(false,playingCards,player,dealer);
          //Tarkistaa onko kumpikaan jakaja tai pelaaja "Bust" , jos ei niin tavallisten sääntöjen mukaan kumpi voittaa kierroksen.
          busted(dealerOverLimit,false,doubleBet,player,dealer);
-
         }
+
         if(doubleCheck==false && insuBlackJack==false){
 
         //Nostetaan kortteja sen verran ,että "Bust" tai pelaaja päättää itse lopettaa korttien nostamisen. Palauttaa arvon true / false.
@@ -494,10 +541,10 @@ bool game::insurance(bool Insurance, int bet, Player* dealer, Player* player){
     return blackjackDealer;
 }
 
-bool game::doubleDown(Player* player,Player* dealer,int bet,vector <Card*>* playingCards ){
+bool game::doubleDown(Player* player,Player* dealer,int bet,vector <Card*>* playingCards, bool blackjack ){
 
     bool doubleDown=false;
-    if(totalPoints(player)<=11&&totalPoints(player)>=9){
+    if(totalPoints(player)<=11&&totalPoints(player)>=9 && blackjack==false){
 
        int chooce=yesOrNo(false,true);
        if(chooce==1){

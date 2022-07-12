@@ -37,7 +37,7 @@ public:
     void nextTurn(Player* player, Player* dealer,Deck* d);
     bool checkInsurance(Player* dealer);
     bool insurance(bool Insurance, int bet, Player* dealer, Player* player);
-    bool doubleDown(Player* player,Player* dealer,int bet,vector <Card*>* playingCards);
+    bool doubleDown(Player* player,Player* dealer,int bet,vector <Card*>* playingCards, bool blackjack);
 
 
 };
