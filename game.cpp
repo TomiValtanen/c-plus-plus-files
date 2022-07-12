@@ -917,7 +917,7 @@ void game::splittingHand(Player* player, Player* dealer,vector <Card*>* playingC
                 playerOverLimit=splitPlayerTurn(playingCards,player,dealer,splitHand,true);
             }
             else{
-                bet=Bet*2;
+                bet=bet*2;
             }
         }
         bool splitBlackjack=splitCheckBlackjack(splitHand);
@@ -927,7 +927,7 @@ void game::splittingHand(Player* player, Player* dealer,vector <Card*>* playingC
                 splitPlayerOverLimit=splitPlayerTurn(playingCards,player,dealer,splitHand,false);
             }
             else{
-                splitBet=Bet*2;
+                splitBet=splitBet*2;
             }
         }
         if(playerOverLimit==true){
@@ -936,10 +936,17 @@ void game::splittingHand(Player* player, Player* dealer,vector <Card*>* playingC
             splitBusted(dealerOverLimit,playerOverLimit,bet,player,dealer,splitHand,true);
         }
         else if(splitPlayerOverLimit==true){
-            bool dealerOverLimit=splitDealerTurn(playerOverLimit,playingCards,player,dealer,splitHand);
+            bool dealerOverLimit=splitDealerTurn(splitPlayerOverLimit,playingCards,player,dealer,splitHand);
             splitBusted(dealerOverLimit,splitPlayerOverLimit,splitBet,player,dealer,splitHand,false);
         }
-        else{
+        else if(splitPlayerOverLimit==true && playerOverLimit==true){
+            //Jakaja nostaa kortteja siihen asti ,että kädessä on 17+ korttien arvo tai "Bust".
+            bool dealerOverLimit=splitDealerTurn(playerOverLimit,playingCards,player,dealer,splitHand);
+            //Tarkistaa onko kumpikaan jakaja tai pelaaja "Bust" , jos ei niin tavallisten sääntöjen mukaan kumpi voittaa kierroksen.
+            splitBusted(dealerOverLimit,playerOverLimit,bet,player,dealer,splitHand,true);
+            splitBusted(dealerOverLimit,splitPlayerOverLimit,splitBet,player,dealer,splitHand,false);
+        }
+        else if(splitPlayerOverLimit==false && playerOverLimit==false){
             // näyttää jakajan toisen kortin ja siirtää sen jakajan käteen.
             moveFaceDownCard(dealer);
 
@@ -951,7 +958,7 @@ void game::splittingHand(Player* player, Player* dealer,vector <Card*>* playingC
         }
         if(playerOverLimit==true && splitPlayerOverLimit==false){
             moveFaceDownCard(dealer);
-            bool dealerOverLimit=splitDealerTurn(playerOverLimit,playingCards,player,dealer,splitHand);
+            bool dealerOverLimit=splitDealerTurn(splitPlayerOverLimit,playingCards,player,dealer,splitHand);
             splitBusted(dealerOverLimit,splitPlayerOverLimit,splitBet,player,dealer,splitHand,false);
         }
         else if(playerOverLimit==false && splitPlayerOverLimit==true){
