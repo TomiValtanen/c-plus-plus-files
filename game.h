@@ -37,7 +37,7 @@ public:
     void nextTurn(Player* player, Player* dealer,Deck* d);
     bool checkInsurance(Player* dealer);
     bool insurance(bool Insurance, int bet, Player* dealer, Player* player);
-    bool doubleDown(Player* player,Player* dealer,int bet,vector <Card*>* playingCards, bool blackjack);
+    bool doubleDown(Player* player,Player* dealer,int bet,vector <Card*>* playingCards, bool blackjack, bool split);
     bool splitCheck(Player* player,bool blackjack);
     void splittingHand(Player* player, Player* dealer,vector <Card*>* playingCards, int bet,bool Split);
     void splitHand(Player* player, vector <Card*>* splitHand);
@@ -48,6 +48,8 @@ public:
     bool splitPlayerTurn(vector <Card*>* playingCards , Player* player,Player* dealer,vector <Card*>* splithand,bool FirstHand );
     void splitPickCard(vector <Card*>* playingCards, int numberOfCards, vector <Card*>* splithand);
     bool splitDoubleDown(Player* player,Player* dealer,int bet,vector <Card*>* playingCards, bool blackjack ,vector <Card*>* splithand, bool firstHand);
+    void splitWinningConditions(Player* player,Player* dealer, int bet,vector <Card*>* splithand , bool firstHand);
+    void splitBusted(bool dealerOverLimit,bool playerOverLimit, int bet, Player* player, Player* dealer,vector <Card*>* splithand, bool firsthand);
 
 
 };
