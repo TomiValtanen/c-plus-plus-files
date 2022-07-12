@@ -43,6 +43,11 @@ public:
     void splitHand(Player* player, vector <Card*>* splitHand);
     void showSplitHands(Player* player, Player* dealer, vector <Card*>* splitHand);
     int  splitTotalPoints( vector <Card*>* splithand);
+    bool splitCheckBlackjack(vector <Card*>* splithand );
+    bool splitDealerTurn(bool PlayerOverlimit,vector <Card*>* playingCards , Player* player,Player* dealer,vector <Card*>* splithand );
+    bool splitPlayerTurn(vector <Card*>* playingCards , Player* player,Player* dealer,vector <Card*>* splithand,bool FirstHand );
+    void splitPickCard(vector <Card*>* playingCards, int numberOfCards, vector <Card*>* splithand);
+    bool splitDoubleDown(Player* player,Player* dealer,int bet,vector <Card*>* playingCards, bool blackjack ,vector <Card*>* splithand, bool firstHand);
 
 
 };
