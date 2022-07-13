@@ -8,7 +8,7 @@ using namespace std;
 class Player
 {
 public:
-    Player(string name , vector <Card*>* hand );
+    Player(string name , vector <Card*>* hand,vector <Card*>* splithand ,int money);
     Player(string name , vector <Card*>* hand,vector <Card*>* dealerCard);
     void setMoney(int bet);
     int getMoney();
@@ -16,6 +16,7 @@ public:
     string name;
 
     vector <Card*>* hand;
+    vector <Card*>* splitHand;
     vector <Card*>* dealerCard;
 private:
     int money;
