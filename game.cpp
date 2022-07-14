@@ -167,11 +167,13 @@ void game::hand(Player* player,bool firsthand){
     vector <Card*>* Hand;
     if(firsthand==true){
         Hand=p->hand;
+        cout << p->name <<"n kortit ovat : \n" << endl;
     }
     else{
         Hand=p->splitHand;
+        cout << p->name <<"n kortit split kadessa ovat : \n" << endl;
     }
-    cout << p->name <<"n kortit ovat : \n" << endl;
+
     for(std::size_t i = 0; i < Hand->size(); ++i){
         Card* c= (*Hand)[i];
 
@@ -306,14 +308,14 @@ void game::winningConditions(Player* player,Player* dealer, int bet,bool split,b
         win=false;
         showHands(player,dealer,split);
         money(win,b,player);
-        cout<<"Jakaja voittija sinä hävisit "<< bet << " euroa";
+        cout<<"Tasapeli. Jakaja palauttaa antamasi panoksen "<< bet << " euroa";
         cout<<"\n\n\n======================================================\n\n\n";
     }
     else if(dp==pp && pp==21){
         win=false;
         showHands(player,dealer,split);
         money(win,b,player);
-        cout<<"Jakaja voittija sinä hävisit "<< bet << " euroa";
+        cout<<"Tasapeli. Jakaja palauttaa antamasi panoksen "<< bet << " euroa";
         cout<<"\n\n\n======================================================\n\n\n";
     }
 }
@@ -621,6 +623,7 @@ void game::splittingHand(Player* player, Player* dealer,vector <Card*>* playingC
             bool doubleCheck=doubleDown(player,dealer,totalBet,playingCards,blackjack,split,true);
             if(doubleCheck==false){
                 totalBet-=Bet;
+                cout<<"Ensimmaisen kaden vuoro.";
                 playerOverLimit=playerTurn(playingCards,player,dealer,split,true);
             }
             else{
@@ -633,6 +636,7 @@ void game::splittingHand(Player* player, Player* dealer,vector <Card*>* playingC
 
             bool splitDoubleCheck=doubleDown(player,dealer,totalBet,playingCards,blackjack,split,false);
             if(splitDoubleCheck==false){
+                cout<<"Toisen kaden vuoro.";
                 splitPlayerOverLimit=playerTurn(playingCards,player,dealer,split,false);
             }
             else{
