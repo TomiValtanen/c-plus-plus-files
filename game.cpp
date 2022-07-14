@@ -29,6 +29,7 @@ string game::name(){
 }
 void game::startGame(Player* player, Player* dealer, Deck* deck){
     system("cls");
+    printBlackjack(player);
     Deck* d=deck;
     vector <Card*>* playingCards= d->getCards();
 
@@ -57,8 +58,7 @@ void game::startGame(Player* player, Player* dealer, Deck* deck){
             cout<<"Tasapeli molemmilla on BlackJack!\nVoitit "<<bet*2;
             player->setMoney(bet);
             cout << "\n \nPaina Enter jatkaaksesi.";
-            cin.ignore();
-            cin.ignore();
+            getch();
         }
         else {
 
@@ -67,8 +67,7 @@ void game::startGame(Player* player, Player* dealer, Deck* deck){
             int bj=bet*1.5;
             player->setMoney(bj);
             cout << "\n \nPaina Enter jatkaaksesi.";
-            cin.ignore();
-            cin.ignore();
+            getch();
 
         }
     }
@@ -182,6 +181,8 @@ void game::hand(Player* player,bool firsthand){
     }
 }
 void game::showHands(Player* player, Player* dealer,bool split){
+    system("cls");
+    printBlackjack(player);
     hand(player,true);
     cout<<"\n\nKokonaispisteet :"<<totalPoints(player,true)<<"\n\n";
     cout<<"\n==================================\n";
@@ -419,6 +420,7 @@ bool game::dealerTurn(bool PlayerOverlimit,vector <Card*>* playingCards , Player
             system ("cls");
             pickCard(playingCards,dealer,1,true);
             showHands(player,dealer,split);
+            sleep(1);
         }
     }
     return dealerOverLimit;
@@ -430,22 +432,19 @@ void game::busted(bool dealerOverLimit,bool playerOverLimit, int bet, Player* pl
         bool win=true;
         money(win,bet,player);
         cout<<"Voitit"<< bet+bet<<" !\nPaina Enter jatkaaksesi.";
-        cin.ignore();
-        cin.ignore();
+        getch();
 
     }
     else if(playerOverLimit==true){
         bool win=false;
         money(win,bet,player);
         cout<<"Havisit "<< bet << " !\nPaina Enter jatkaaksesi.";
-        cin.ignore();
-        cin.ignore();
+        getch();
     }
     else{
         winningConditions(player,dealer,bet,split,firsthand);
         cout << "\n \nPaina Enter jatkaaksesi.";
-        cin.ignore();
-        cin.ignore();
+        getch();
     }
 
 }
@@ -504,16 +503,14 @@ bool game::insurance(bool Insurance, int bet, Player* dealer, Player* player){
                 money(normalWin,bet,player);
 
                 cout << "\n \nPaina Enter jatkaaksesi.";
-                cin.ignore();
-                cin.ignore();
+                getch();
             }
             else{
                 bool insuranceWin=false;
                 cout<<"Jakajan toinen kortti ei ollut 10, joten hävisit"<< bet/2 <<" euron insurancen. Peli jatkuu normaalisti";
                 money(insuranceWin,insuranceBet,player);
                 cout << "\n \nPaina Enter jatkaaksesi.";
-                cin.ignore();
-                cin.ignore();
+                getch();
 
             }
         }
@@ -523,8 +520,7 @@ bool game::insurance(bool Insurance, int bet, Player* dealer, Player* player){
                 blackjackDealer=false;
                 cout<<"Sinulla ei ollut tarpeeksi rahaa laittaa insurancea. Peli jatkuu normaalisti.";
                 cout << "\n \nPaina Enter jatkaaksesi.";
-                cin.ignore();
-                cin.ignore();
+                getch();
             }
             else {
                 blackjackDealer=false;
@@ -691,6 +687,18 @@ void game::splittingHand(Player* player, Player* dealer,vector <Card*>* playingC
             busted(dealerOverLimit,playerOverLimit,bet,player,dealer,split,true);
         }
     }
+}
+void  game::printBlackjack(Player* player){
+  cout<<"         _______  __        _____     ______  __    __     _____   ______    ______  __    __\n";
+  cout<<"        /####### /##|      /######   /######|/##   /##|   /#####| /######   /###### /##   /##\n";
+  cout<<"       | ##__  #| ##|     /##__  ## /##___ #| ##  /##/   |__  ##|/##__  ## /##__  #| ##  /##/\n";
+  cout<<"       | ##  | #| ##|    | ##| | ##| ##|  |#| ## /##/       | ##| ##| | ##| ##| |_#| ## /##/ \n";
+  cout<<"       | #######| ##|    | ########| ##|    | #####/   __   | ##| ########| ##|    | #####/  \n";
+  cout<<"       | ##__  #| ##|    | ## __ ##| ##|   _| ##|##|  /##|  | ##| ##__  ##| ##|    | ##|##|  \n";
+  cout<<"       | ##  | #| ##|____| ## | |##| ##|__|#| ##| ##|| ##|__| ##| ##| | ##| ##|__ #| ##| ##| \n";
+  cout<<"       | #######| #######| ## | |##|  ######| ##||##|| ########/| ##| | ##|  ######| ##||##| \n";
+  cout<<"       |_______/|________|___/  |__/|______/|__/ |__/|________/ |__/  |__/|______/ |__/ |__/ \n\n";
+  cout<<"          Nimimerkki: "<<player->name<<"    Rahaa jaljella: "<<player->getMoney()<<"     \n\n\n";
 }
 
 

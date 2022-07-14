@@ -11,6 +11,7 @@
 #include<limits>
 #include <cstdlib>
 #include <unistd.h>
+#include <conio.h>
 
 
 
@@ -40,6 +41,7 @@ public:
     bool doubleDown(Player* player,Player* dealer,int bet,vector <Card*>* playingCards, bool blackjack, bool split,bool Firsthand);
     bool splitCheck(Player* player,bool blackjack, int bet);
     void splittingHand(Player* player, Player* dealer,vector <Card*>* playingCards, int bet,bool Split);
+    void printBlackjack(Player* player);
 
 
 };

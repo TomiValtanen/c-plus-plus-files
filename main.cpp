@@ -2,6 +2,7 @@
 #include "deck.h"
 #include "game.h"
 
+
 using namespace std;
 int newGame();
 void gameMenu();
@@ -12,6 +13,7 @@ void menu();
 int main()
 {
 bool gameSession=true;
+
     menu();
     game* startGame=new game();
     delete startGame;
@@ -56,21 +58,21 @@ return choose;
     }
 void gameMenu(){
 
-    cout<<"===============================================================\n";
-    cout<<"===============================================================\n";
-    cout<<"                         BLACKJACK                            \n";
-    cout<<"                                                               \n";
-    cout<<"                                                               \n";
-    cout<<"                                                               \n";
-    cout<<"                         1.Pelaa                               \n";
-    cout<<"                                                               \n";
-    cout<<"                         2.Saannot                             \n";
-    cout<<"                                                               \n";
-    cout<<"                                                               \n";
-    cout<<"                                                               \n";
-    cout<<"                                                               \n";
-    cout<<"===============================================================\n";
-    cout<<"===============================================================\n";
+    cout<<"                    ===============================================================\n";
+    cout<<"                    ===============================================================\n";
+    cout<<"                                               MENU                                \n";
+    cout<<"                                                                                   \n";
+    cout<<"                                                                                   \n";
+    cout<<"                                                                                   \n";
+    cout<<"                                             1.Pelaa                               \n";
+    cout<<"                                                                                   \n";
+    cout<<"                                             2.Saannot                             \n";
+    cout<<"                                                                                   \n";
+    cout<<"                                                                                   \n";
+    cout<<"                                                                                   \n";
+    cout<<"                                                                                   \n";
+    cout<<"                    ===============================================================\n";
+    cout<<"                    ===============================================================\n";
 
 }
 void rules(){
@@ -90,8 +92,9 @@ void menu(){
 
     do{
         system("cls");
+
         gameMenu();
-        cout<<"Valitse yllaolevista vaihtoehdoista mita haluat tehda.";
+        cout<<"                       Valitse yllaolevista vaihtoehdoista mita haluat tehda.\n\n";
         cin>>choice;
 
         if(choice==1){
