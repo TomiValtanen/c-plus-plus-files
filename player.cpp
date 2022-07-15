@@ -7,6 +7,7 @@ Player::Player(string name,vector <Card*>* hand ,vector <Card*>* splithand,int m
     this->splitHand=splithand;
     this->money=money;
     this->bet=0;
+    this->splitBet=0;
 
 }
 Player::Player(string name , vector <Card*>* hand,vector <Card*>* dealerCard){
@@ -32,4 +33,14 @@ int Player::getBet(){
 }
 void Player::addBet(int bet){
     this->bet+=bet;
+}
+
+void Player::setSplitBet(int bet){
+    splitBet=bet;
+}
+void Player::addSplitBet(int bet){
+    splitBet+=bet;
+}
+int Player::getSplitBet(){
+    return splitBet;
 }
