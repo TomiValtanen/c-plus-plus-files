@@ -175,10 +175,12 @@ void game::hand(Player* player,bool firsthand){
     if(firsthand==true){
         Hand=p->hand;
         cout << p->name <<"n kortit ovat : \n" << endl;
+
     }
     else{
         Hand=p->splitHand;
         cout << p->name <<"n kortit split kadessa ovat : \n" << endl;
+
     }
 
     for(std::size_t i = 0; i < Hand->size(); ++i){
@@ -192,11 +194,13 @@ void game::showHands(Player* player, Player* dealer,bool split){
     system("cls");
     printBlackjack(player);
     hand(player,true);
-    cout<<"\n\nKokonaispisteet :"<<totalPoints(player,true)<<"\n\n";
+    cout<<"\n\nEnsimmainen kasi\n";
+    cout<<"Kokonaispisteet :"<<totalPoints(player,true)<<"\n";
     cout<<"\n==================================\n";
     if(split==true){
     hand(player,false);
-    cout<<"\n\nKokonaispisteet :"<<totalPoints(player,false)<<"\n\n";
+    cout<<"\n\nToinen kasi\n";
+    cout<<"Kokonaispisteet :"<<totalPoints(player,false)<<"\n";
     cout<<"\n==================================\n";
 }
     hand(dealer,true);
@@ -285,6 +289,14 @@ void game::winningConditions(Player* player,Player* dealer,bool split,bool first
     int betPlayer=player->getBet();
     int betDealer=dealer->getBet();
     int winningPool=betPlayer+betDealer;
+    if(split==true && firsthand==false){
+    betPlayer=player->getSplitBet();
+    winningPool=betPlayer+(betDealer/2);
+    }
+    else if(split==true && firsthand==true){
+        winningPool=betPlayer+(betDealer/2);
+    }
+
     bool win;
     system("cls");
     if(dp>21){
@@ -442,9 +454,12 @@ void game::busted(bool dealerOverLimit,bool playerOverLimit, Player* player, Pla
     int betPlayer=player->getBet();
     int betDealer=dealer->getBet();
     int winningPool=betPlayer+betDealer;
-    if(split==true){
+    if(split==true && firsthand==false){
     betPlayer=player->getSplitBet();
     winningPool=betPlayer+(betDealer/2);
+    }
+    else if(split==true && firsthand==true){
+        winningPool=betPlayer+(betDealer/2);
     }
 
     if (dealerOverLimit==true){
@@ -698,7 +713,7 @@ void game::splittingHand(Player* player, Player* dealer,vector <Card*>* playingC
             busted(dealerOverLimit,splitPlayerOverLimit,player,dealer,split,false);
 
         }
-        if(playerOverLimit==true && splitPlayerOverLimit==false){
+        else if(playerOverLimit==true && splitPlayerOverLimit==false){
             moveFaceDownCard(dealer);
 
             bool dealerOverLimit=dealerTurn(splitPlayerOverLimit,playingCards,player,dealer,split);

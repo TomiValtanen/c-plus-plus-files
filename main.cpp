@@ -8,6 +8,7 @@ int newGame();
 void gameMenu();
 void rules();
 void menu();
+void blackjack();
 
 
 int main()
@@ -77,6 +78,7 @@ void gameMenu(){
 }
 void rules(){
     system ("cls");
+    blackjack();
     cout<<"=====================================================================================================================\n";
     cout<<"                                                  SAANNOT                                                            \n\n\n";
     cout<<"Pelaaja pelaa pankkia (jakaja) vastaan.Jakaja jakaa pelaajalle kaksi korttia kuvapuoli \nylospain ja itselleen kaksi korttia, joista toisen kuvapuoli ylospain ja toisen kuvapuoli alaspain.\nPelaaja ilmoittaa, haluaako han uuden kortin. Jakaja jakaa, kunnes pelaaja ei halua enaa lisaa \nkortteja tai korttien pistemaara on yli kaksikymmentayksi.\nKun jokainen pelaaja pelipoydassa on tehnyt valintansa, jakaja paljastaa toisen korttinsa ja \nottaa itselleen lisakortteja, mikali hanen katensä arvo on 16 tai pienempi.\nKun jakajalla on vähintaan 17, han ei saa ottaa enaa lisaa kortteja. Pelin voittaa se, jolla korttien yhteislukema on suurempi menematta yli kahtakymmentayhta tai tasan 21.\n Kahdella ensimmaisella kortilla saatu pistemaara kaksikymmentayksi (assa ja kuvakortti/kymppi) on nimeltaan blackjack,\n ja se voittaa minka tahansa useammalla kuin kahdella kortilla saadun 21 pisteen summan. Jos pelaajalla ja jakajalla on yhteislukema sama, pelaaja haviaa, \n paitsi jos kyseessa on tasapeli kahdessakymmenessayhdessa tai blackjackissa (niin sanottu stand off).\n Jos yhteislukema on suurempi kuin kaksikymmentayksi, sen summan saanut haviaa.";
@@ -92,7 +94,7 @@ void menu(){
 
     do{
         system("cls");
-
+        blackjack();
         gameMenu();
         cout<<"                       Valitse yllaolevista vaihtoehdoista mita haluat tehda.\n\n";
         cin>>choice;
@@ -111,5 +113,15 @@ void menu(){
     }
     while(!startGame);
 }
-
+void blackjack(){
+cout<<"         _______  __        _____      ______  __    ___     _____   ______    ______  __    __\n";
+cout<<"        /####### /##|      /######    /######|/##|  /## |   /#####| /######   /###### /##|  /##\n";
+cout<<"       | ##__  #| ##|     /##__  ##  /##___ #| ##| /## /   |__  ##|/##__  ## /##__  #| ##| /##/\n";
+cout<<"       | ##  | #| ##|    | ##| | ## | ##|  |#| ##|/## /       | ##| ##| | ##| ##| |_#| ##|/##/ \n";
+cout<<"       | #######| ##|    | ######## | ##|    | ##### /   __   | ##| ########| ##|    | #####/  \n";
+cout<<"       | ##__  #| ##|    | ## __ ## | ##|   _| ##| ##|  /##|  | ##| ##__  ##| ##|    | ##| ##|  \n";
+cout<<"       | ##  | #| ##|____| ## | |## | ##|__|#| ##| ##| | ##|__| ##| ##| | ##| ##|__ #| ##| ##| \n";
+cout<<"       | #######| #######| ## | |## |  ######| ## | ##|| ########/| ##| | ##|  ######| ## | ##| \n";
+cout<<"       |_______/|________|___/  |__/|_______/|__/  |__/|________/ |__/  |__/|______/ |__/  |__/ \n\n";
+}
 
