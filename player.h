@@ -18,9 +18,15 @@ public:
     void addBet(int bet);
     int getBet();
 
+    void setOriginalBet(int bet);
+    int getOriginalBet();
+
     void setSplitBet(int bet);
     void addSplitBet(int bet);
     int getSplitBet();
+
+
+
 
 
     string name;
@@ -31,6 +37,7 @@ public:
 private:
     int money;
     int bet;
+    int OriginalBet;
     int splitBet;
 };
 

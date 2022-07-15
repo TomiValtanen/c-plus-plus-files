@@ -39,7 +39,7 @@ public:
     bool checkInsurance(Player* dealer);
     bool insurance(bool Insurance,Player* dealer, Player* player);
     bool doubleDown(Player* player,Player* dealer,vector <Card*>* playingCards, bool blackjack, bool split,bool Firsthand);
-    bool splitCheck(Player* player,bool blackjack);
+    bool splitCheck(Player* player,Player* dealer,bool blackjack);
     void splittingHand(Player* player, Player* dealer,vector <Card*>* playingCards,bool Split);
     void printBlackjack(Player* player);
     void playerDealerbet(Player* player, Player* dealer);
