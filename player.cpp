@@ -8,6 +8,7 @@ Player::Player(string name,vector <Card*>* hand ,vector <Card*>* splithand,int m
     this->money=money;
     this->bet=0;
     this->OriginalBet=0;
+    this-> highScore=0;
 
 }
 Player::Player(string name , vector <Card*>* hand,vector <Card*>* dealerCard){
@@ -51,4 +52,10 @@ void Player::addSplitBet(int bet){
 }
 int Player::getSplitBet(){
     return splitBet;
+}
+void Player::setHighScore(int money){
+    highScore=money;
+}
+int Player::getHighScore(){
+    return highScore;
 }

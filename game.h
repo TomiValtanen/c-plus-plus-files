@@ -44,7 +44,7 @@ public:
     void printBlackjack(Player* player);
     void playerDealerbet(Player* player, Player* dealer);
     void setDealerAndPlayerBet(Player* player,Player* dealer);
-
+    void checkScore(Player*player);
 
 };
 

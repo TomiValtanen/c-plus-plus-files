@@ -25,6 +25,9 @@ public:
     void addSplitBet(int bet);
     int getSplitBet();
 
+    void setHighScore(int money);
+    int getHighScore();
+
 
 
 
@@ -39,6 +42,7 @@ private:
     int bet;
     int OriginalBet;
     int splitBet;
+    int highScore;
 };
 
 #endif // PLAYER_H
