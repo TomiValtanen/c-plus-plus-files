@@ -30,18 +30,19 @@ public:
     void faceDownDealerCard(vector <Card*>* playingCards,Player* player );
     void moveFaceDownCard(Player* dealer);
     bool checkBlackjack(Player* player,bool firsthand  );
-    int betAmountCheck(Player* player);
+    void betAmountCheck(Player* player);
     void money(bool win , int bet,Player* player);
     bool playerTurn(vector <Card*>* playingCards , Player* player,Player* dealer,bool split,bool firsthand);
     bool dealerTurn(bool PlayerOverlimit,vector <Card*>* playingCards , Player* player,Player* dealer,bool split);
-    void busted(bool dealerOverLimit,bool playerOverLimit, int bet, Player* player, Player* dealer,bool split,bool firsthand);
+    void busted(bool dealerOverLimit,bool playerOverLimit, Player* player, Player* dealer,bool split,bool firsthand);
     void nextTurn(Player* player, Player* dealer,Deck* d);
     bool checkInsurance(Player* dealer);
-    bool insurance(bool Insurance, int bet, Player* dealer, Player* player);
-    bool doubleDown(Player* player,Player* dealer,int bet,vector <Card*>* playingCards, bool blackjack, bool split,bool Firsthand);
-    bool splitCheck(Player* player,bool blackjack, int bet);
-    void splittingHand(Player* player, Player* dealer,vector <Card*>* playingCards, int bet,bool Split);
+    bool insurance(bool Insurance,Player* dealer, Player* player);
+    bool doubleDown(Player* player,Player* dealer,vector <Card*>* playingCards, bool blackjack, bool split,bool Firsthand);
+    bool splitCheck(Player* player,bool blackjack);
+    void splittingHand(Player* player, Player* dealer,vector <Card*>* playingCards,bool Split);
     void printBlackjack(Player* player);
+    void playerDealerbet(Player* player, Player* dealer);
 
 
 };
