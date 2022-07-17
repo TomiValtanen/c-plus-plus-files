@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "deck.h"
 #include "game.h"
 
@@ -7,20 +8,22 @@ using namespace std;
 int newGame();
 void gameMenu();
 void rules();
-void menu();
+bool menu();
 void blackjack();
-
+void hiScore();
 
 int main()
 {
-bool gameSession=true;
+bool gameSession=menu();
 
-    menu();
+    if(gameSession==true){
     game* startGame=new game();
     delete startGame;
     do{
     int continueGame=newGame();
-    if(continueGame==1){
+        gameSession=menu();
+    if(continueGame==1 && gameSession==true){
+
         game* Game=new game();
         delete Game;
     }
@@ -29,6 +32,7 @@ bool gameSession=true;
     }
 }
     while(gameSession==true);
+    }
     return 0;
 }
 
@@ -59,21 +63,23 @@ return choose;
     }
 void gameMenu(){
 
-    cout<<"                    ===============================================================\n";
-    cout<<"                    ===============================================================\n";
-    cout<<"                                               MENU                                \n";
-    cout<<"                                                                                   \n";
-    cout<<"                                                                                   \n";
-    cout<<"                                                                                   \n";
-    cout<<"                                             1.Pelaa                               \n";
-    cout<<"                                                                                   \n";
-    cout<<"                                             2.Saannot                             \n";
-    cout<<"                                                                                   \n";
-    cout<<"                                                                                   \n";
-    cout<<"                                                                                   \n";
-    cout<<"                                                                                   \n";
-    cout<<"                    ===============================================================\n";
-    cout<<"                    ===============================================================\n";
+    cout<<"_________________________________________________________________________________________\n";
+    cout<<"|                                                                                        |\n";
+    cout<<"|                                       MENU                                             |\n";
+    cout<<"|                                                                                        |\n";
+    cout<<"|                                                                                        |\n";
+    cout<<"|                                                                                        |\n";
+    cout<<"|                                     1.Pelaa                                            |\n";
+    cout<<"|                                                                                        |\n";
+    cout<<"|                                     2.Saannot                                          |\n";
+    cout<<"|                                                                                        |\n";
+    cout<<"|                                     3.Ennatykset                                       |\n";
+    cout<<"|                                                                                        |\n";
+    cout<<"|                                     4.Poistu                                           |\n";
+    cout<<"|                                                                                        |\n";
+    cout<<"|                                                                                        |\n";
+    cout<<"|                                                                                        |\n";
+    cout<<"------------------------------------------------------------------------------------------\n";
 
 }
 void rules(){
@@ -88,15 +94,16 @@ void rules(){
     gameMenu();
 
 }
-void menu(){
+bool menu(){
     int choice;
+    bool gameSession=true;
     bool startGame=false;
 
     do{
         system("cls");
         blackjack();
         gameMenu();
-        cout<<"                       Valitse yllaolevista vaihtoehdoista mita haluat tehda.\n\n";
+        cout<<"Valitse yllaolevista vaihtoehdoista mita haluat tehda.\n\n";
         cin>>choice;
 
         if(choice==1){
@@ -105,23 +112,45 @@ void menu(){
         else if(choice ==2){
             rules();
         }
+        else if(choice==3){
+            system("cls");
+            hiScore();
+            getch();
+        }
+        else if(choice==4){
+         gameSession=false;
+         break;
+        }
         else {
-            cout<<"Sinun taytyy painaa 1 , 2 tai 3 jatkaaksesi!";
+            cout<<"Sinun taytyy painaa 1 , 2 , 3 tai 4 jatkaaksesi!";
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
     }
     while(!startGame);
+    return gameSession;
 }
 void blackjack(){
-cout<<"         _______  __        _____      ______  __    ___     _____   ______    ______  __    __\n";
-cout<<"        /####### /##|      /######    /######|/##|  /## |   /#####| /######   /###### /##|  /##\n";
-cout<<"       | ##__  #| ##|     /##__  ##  /##___ #| ##| /## /   |__  ##|/##__  ## /##__  #| ##| /##/\n";
-cout<<"       | ##  | #| ##|    | ##| | ## | ##|  |#| ##|/## /       | ##| ##| | ##| ##| |_#| ##|/##/ \n";
-cout<<"       | #######| ##|    | ######## | ##|    | ##### /   __   | ##| ########| ##|    | #####/  \n";
-cout<<"       | ##__  #| ##|    | ## __ ## | ##|   _| ##| ##|  /##|  | ##| ##__  ##| ##|    | ##| ##|  \n";
-cout<<"       | ##  | #| ##|____| ## | |## | ##|__|#| ##| ##| | ##|__| ##| ##| | ##| ##|__ #| ##| ##| \n";
-cout<<"       | #######| #######| ## | |## |  ######| ## | ##|| ########/| ##| | ##|  ######| ## | ##| \n";
-cout<<"       |_______/|________|___/  |__/|_______/|__/  |__/|________/ |__/  |__/|______/ |__/  |__/ \n\n";
+cout<<"  _______  __        _____      ______  __    ___     _____   ______    ______  __    __\n";
+cout<<" /####### /##|      /######    /######|/##|  /## |   /#####| /######   /###### /##|  /##\n";
+cout<<"| ##__  #| ##|     /##__  ##  /##___ #| ##| /## /   |__  ##|/##__  ## /##__  #| ##| /##/\n";
+cout<<"| ##  | #| ##|    | ##| | ## | ##|  |#| ##|/## /       | ##| ##| | ##| ##| |_#| ##|/##/ \n";
+cout<<"| #######| ##|    | ######## | ##|    | ##### /   __   | ##| ########| ##|    | #####/  \n";
+cout<<"| ##__  #| ##|    | ## __ ## | ##|   _| ##| ##|  /##|  | ##| ##__  ##| ##|    | ##| ##|  \n";
+cout<<"| ##  | #| ##|____| ## | |## | ##|__|#| ##| ##| | ##|__| ##| ##| | ##| ##|__ #| ##| ##| \n";
+cout<<"| #######| #######| ## | |## |  ######| ## | ##|| ########/| ##| | ##|  ######| ## | ##| \n";
+cout<<"|_______/|________|___/  |__/|_______/|__/  |__/|________/ |__/  |__/|______/ |__/  |__/ \n\n";
+}
+
+void hiScore(){
+fstream myFile;
+myFile.open("HiScore.txt",ios::in);
+if(myFile.is_open()){
+    string line;
+    while(getline(myFile,line)){
+        cout<<line<<endl;
+    }
+    myFile.close();
+}
 }
 

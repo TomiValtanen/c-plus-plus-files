@@ -5,6 +5,7 @@
 #include "player.h"
 #include <vector>
 #include <iostream>
+#include <fstream>
 #include <chrono>
 #include <random>
 #include <algorithm>
@@ -45,6 +46,7 @@ public:
     void playerDealerbet(Player* player, Player* dealer);
     void setDealerAndPlayerBet(Player* player,Player* dealer);
     void checkScore(Player*player);
+    void saveScore(Player* player);
 
 };
 
