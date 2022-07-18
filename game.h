@@ -47,6 +47,7 @@ public:
     void setDealerAndPlayerBet(Player* player,Player* dealer);
     void checkScore(Player*player);
     void saveScore(Player* player);
+    void blackjack(Player* player, Player* dealer,bool blackjack,bool split,bool firsthand);
 
 };
 
