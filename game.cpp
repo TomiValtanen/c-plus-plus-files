@@ -292,13 +292,13 @@ void game::winningConditions(Player* player,Player* dealer,bool split,bool first
     }
     else if(pp>21){
         showHands(player,dealer,split);
-        cout<<"Jakaja voittija ja keraa panoksen havisit"<< betPlayer << " euroa";
+        cout<<"Jakaja voittija ja keraa panoksen havisit "<< betPlayer << " euroa";
         cout<<"\n\n\n======================================================\n\n\n";
 
     }
     else if(dp>pp && dp<=21){
         showHands(player,dealer,split);
-        cout<<"Jakaja voittija ja keraa panoksen havisit"<< betPlayer << " euroa";
+        cout<<"Jakaja voittija ja keraa panoksen havisit "<< betPlayer << " euroa";
         cout<<"\n\n\n======================================================\n\n\n";
 
     }
@@ -349,12 +349,12 @@ void game::betAmountCheck(Player* player){
     do{
         cin>>bet;
         if(bet<10 || bet>100){
-            cout<<"Pienin mahdollinen panostus on 10 euroa ja suurin mahdollinen 100 euroa!";
+            cout<<"\nPienin mahdollinen panostus on 10 euroa ja suurin mahdollinen 100 euroa!\n";
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
         else if (bet > p->getMoney()){
-            cout<<"Sinulla ei ole noin paljon rahaa! Sinulla on rahaa "<<p->getMoney()<<"\n";
+            cout<<"\nSinulla ei ole noin paljon rahaa! Sinulla on rahaa "<<p->getMoney()<<"\n";
         }
         else {
             validNumber=true;
@@ -416,7 +416,7 @@ bool game::dealerTurn(bool PlayerOverlimit,vector <Card*>* playingCards , Player
             break;
         }
         else if(totalPoints(dealer,true)>21){
-            cout<<"Jakaja ylitti pisterajan!\nSina voitit!\n\n";
+            cout<<"\nJakaja ylitti pisterajan!\nSina voitit!\n\n";
             dealerOverLimit=true;
             dealerTurn=false;
         }
@@ -449,13 +449,13 @@ void game::busted(bool dealerOverLimit,bool playerOverLimit, Player* player, Pla
     if (dealerOverLimit==true){
         bool win=true;
         money(win,winningPool,player);
-        cout<<"Voitit"<< betPlayer<<" ! Jakaja palauttaa laittamasi panoksen.\nPaina Enter jatkaaksesi.";
+        cout<<"Voitit "<< betPlayer<<" euroa ! Jakaja palauttaa laittamasi panoksen.\nPaina Enter jatkaaksesi.";
         getch();
 
     }
     else if(playerOverLimit==true){
         showHands(player,dealer,split);
-        cout<<"Havisit "<< betPlayer << " !\nPaina Enter jatkaaksesi.";
+        cout<<"Havisit "<< betPlayer << " euroa !\nPaina Enter jatkaaksesi.";
         getch();
     }
     else{
@@ -466,7 +466,7 @@ void game::busted(bool dealerOverLimit,bool playerOverLimit, Player* player, Pla
     }
     else{
         winningPool=(betPlayer*1.5)+betPlayer;
-        cout<<"Sait blackjackin! Voitit "<<betPlayer*1.5<<" euroa.";
+        cout<<"Sait blackjackin! Voitit "<<betPlayer*1.5<<" euroa.Jakaja antaa panoksesi myos takaisin.";
 
         money(true,winningPool,player);
         getch();
@@ -524,8 +524,8 @@ bool game::insurance(bool Insurance, Player* dealer, Player* player){
                 bool insuranceWin=true;
                 moveFaceDownCard(dealer);
                 showHands(player,dealer,false);
-                cout<<"Jakajalla on toinen kortti 10 arvoinen eli jakajalla on blackjack. Insurancelle asettamasi panos oli"<< insuranceBet <<" euroa.\nSaat taman tuplattuna takaisin "<<bet<<" euroa.";
-                cout<<"Koska jakajalla on blackjack haviat alkuperaisen panoksesi"<< bet <<" euroa.";
+                cout<<"\nJakajalla on toinen kortti 10 arvoinen eli jakajalla on blackjack. Insurancelle asettamasi panos oli"<< insuranceBet <<" euroa.\nSaat taman tuplattuna takaisin "<<bet<<" euroa.";
+                cout<<"Koska jakajalla on blackjack haviat alkuperaisen panoksesi"<< bet <<" euroa.\n";
                 money(insuranceWin,bet,player);
 
 
@@ -533,7 +533,7 @@ bool game::insurance(bool Insurance, Player* dealer, Player* player){
                 getch();
             }
             else{
-                cout<<"Jakajan toinen kortti ei ollut 10, joten havisit"<< bet/2 <<" euron insurancen. Peli jatkuu normaalisti";
+                cout<<"\nJakajan toinen kortti ei ollut 10, joten havisit"<< bet/2 <<" euron insurancen. Peli jatkuu normaalisti\n";
                 cout << "\n \nPaina Enter jatkaaksesi.";
                 getch();
 
@@ -565,7 +565,7 @@ bool game::doubleDown(Player* player,Player* dealer,vector <Card*>* playingCards
 
         int chooce=yesOrNo(false,true,false);
         if(chooce==1){
-            cout<<"Olet laittanut panokseksi "<<originalBet<<" euroa. Olet laittamassa tuplana alkuperaisen panoksesi.";
+            cout<<"\nOlet laittanut panokseksi "<<originalBet<<" euroa. Olet laittamassa tuplana alkuperaisen panoksesi.\n";
 
 
             if(player->getMoney()>=originalBet){
@@ -577,13 +577,13 @@ bool game::doubleDown(Player* player,Player* dealer,vector <Card*>* playingCards
                 }
                 money(false,originalBet,player);
                 dealer->addBet(originalBet);
-                cout<<"Sinulla on tarpeeksi rahaa tehda double down. Jakaja jakaa sinulle nyt viimeisen kortin.";
+                cout<<"\nSinulla on tarpeeksi rahaa tehda double down. Jakaja jakaa sinulle nyt viimeisen kortin.\n";
                 pickCard(playingCards,player,1,firsthand);
                 showHands(player,dealer,split);
                 doubleDown=true;
             }
             else{
-                cout<<"Sinulla ei ole tarpeeksi rahaa double down, mutta voit jatkaa normaalisti korttien ottamista.";
+                cout<<"\nSinulla ei ole tarpeeksi rahaa double down, mutta voit jatkaa normaalisti korttien ottamista.\n";
                 doubleDown=false;
             }
         }
@@ -606,7 +606,7 @@ bool game::splitCheck(Player* player,Player* dealer,bool blackjack){
     if(c->Face==c1->Face && blackjack==false){
         int chooce=yesOrNo(false,false,true);
         if(chooce==1){
-            cout<<"Olet laittanut panokseksi "<<bet<<" euroa. Laitat saman verran panosta myos toiselle kadelle.";
+            cout<<"\nOlet laittanut panokseksi "<<bet<<" euroa. Laitat saman verran panosta myos toiselle kadelle.\n";
             if(player->getMoney()>=bet){
                 player->setSplitBet(bet);
                 dealer->addBet(bet);
@@ -614,7 +614,7 @@ bool game::splitCheck(Player* player,Player* dealer,bool blackjack){
                 split=true;
             }
             else{
-                cout<<"Sinulla ei ole tarpeeksi rahaa splittiin, mutta voit jatkaa normaalisti korttien ottamista.";
+                cout<<"\nSinulla ei ole tarpeeksi rahaa splittiin, mutta voit jatkaa normaalisti korttien ottamista.\n";
                 split=false;
             }
         }
@@ -673,40 +673,48 @@ void game::splittingHand(Player* player, Player* dealer,vector <Card*>* playingC
 
 
         }
-           /*  if(blackjackCheck==true && splitBlackjack==false && splitPlayerOverLimit==false){
-
-                 bool dealerOverLimit=dealerTurn(splitPlayerOverLimit,playingCards,player,dealer,split);
-                 //Tarkistaa onko kumpikaan jakaja tai pelaaja "Bust" , jos ei niin tavallisten sääntöjen mukaan kumpi voittaa kierroksen.
-                 busted(dealerOverLimit,splitPlayerOverLimit,player,dealer,split,false);
-             }
-             else if(blackjackCheck==false && splitBlackjack==true && playerOverLimit==false){
-                 bool dealerOverLimit=dealerTurn(playerOverLimit,playingCards,player,dealer,split);
-                 //Tarkistaa onko kumpikaan jakaja tai pelaaja "Bust" , jos ei niin tavallisten sääntöjen mukaan kumpi voittaa kierroksen.
-                 busted(dealerOverLimit,playerOverLimit,player,dealer,split,true);
-
-             }*/
              if(splitPlayerOverLimit==false || playerOverLimit==false){
             // näyttää jakajan toisen kortin ja siirtää sen jakajan käteen.
             moveFaceDownCard(dealer);
 
             bool dealerOverLimit=dealerTurn(playerOverLimit,playingCards,player,dealer,split);
             //Tarkistaa onko kumpikaan jakaja tai pelaaja "Bust" , jos ei niin tavallisten sääntöjen mukaan kumpi voittaa kierroksen.
+            cout<<"\nEnsimmaisen kaden tarkastus : \n";
+            cout << "\n \nPaina Enter jatkaaksesi.";
+            getch();
+            system("cls");
+            showHands(player,dealer,split);
             busted(dealerOverLimit,playerOverLimit,player,dealer,split,true,blackjackCheck);
 
 
             dealerOverLimit=dealerTurn(splitPlayerOverLimit,playingCards,player,dealer,split);
             //Tarkistaa onko kumpikaan jakaja tai pelaaja "Bust" , jos ei niin tavallisten sääntöjen mukaan kumpi voittaa kierroksen.
+            cout<<"\nToisen kaden tarkastus : \n";
+            cout << "\n \nPaina Enter jatkaaksesi.";
+            getch();
+            system("cls");
+            showHands(player,dealer,split);
             busted(dealerOverLimit,splitPlayerOverLimit,player,dealer,split,false,splitBlackjack);
 
              }
              else if(splitPlayerOverLimit==true && playerOverLimit==true){
                  bool dealerOverLimit=dealerTurn(playerOverLimit,playingCards,player,dealer,split);
                  //Tarkistaa onko kumpikaan jakaja tai pelaaja "Bust" , jos ei niin tavallisten sääntöjen mukaan kumpi voittaa kierroksen.
+                 cout<<"\nEnsimmaisen kaden tarkastus : \n";
+                 cout << "\n \nPaina Enter jatkaaksesi.";
+                 getch();
+                 system("cls");
+                 showHands(player,dealer,split);
                  busted(dealerOverLimit,playerOverLimit,player,dealer,split,true,blackjackCheck);
 
 
                  dealerOverLimit=dealerTurn(splitPlayerOverLimit,playingCards,player,dealer,split);
                  //Tarkistaa onko kumpikaan jakaja tai pelaaja "Bust" , jos ei niin tavallisten sääntöjen mukaan kumpi voittaa kierroksen.
+                 cout<<"\nToisen kaden tarkastus : \n";
+                 cout << "\n \nPaina Enter jatkaaksesi.";
+                 getch();
+                 system("cls");
+                 showHands(player,dealer,split);
                  busted(dealerOverLimit,splitPlayerOverLimit,player,dealer,split,false,splitBlackjack);
              }
              }
@@ -732,7 +740,7 @@ void game::playerDealerbet(Player* player, Player* dealer){
     dealer->setBet(pBet);
     player->setOriginalBet(pBet);
     money(false,pBet,player);
-    cout<<"Sinulle jaa rahaa panostuksen jalkeen "<< player->getMoney()<<" euroa.";
+    cout<<"\nSinulle jaa rahaa panostuksen jalkeen "<< player->getMoney()<<" euroa.\n";
     sleep(2);
 }
 //Laittaa panokset 0
@@ -756,7 +764,6 @@ void game::saveScore(Player* player){
     int highscore = 0;
     int score=player->getHighScore();
     bool newrecord=false;
-
     ifstream readFile;
     readFile.open("Score.txt");
     if(readFile.is_open()){

@@ -23,6 +23,7 @@ public:
     void shuffle();
 
 
+
     vector <Card*>* gameDeck;
 
 };
