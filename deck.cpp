@@ -2,9 +2,9 @@
 
 Deck::Deck()
 {
-this->gameDeck=new vector <Card*>();
-createDeck();
-shuffle();
+    this->gameDeck=new vector <Card*>();
+    createDeck();
+    shuffle();
 }
 Deck::~Deck(){
 
@@ -21,12 +21,12 @@ void Deck::createDeck(){
 
     for (int i=0;i<4;i++){
         for(int j=0;j<13;j++){
-        string Faces=Face[j];
-        string Symbols=Symbol[i];
-        int Points=Point[j];
+            string Faces=Face[j];
+            string Symbols=Symbol[i];
+            int Points=Point[j];
 
-        Card* c=new Card(Faces,Symbols,Points);
-        gameDeck->push_back(c);
+            Card* c=new Card(Faces,Symbols,Points);
+            gameDeck->push_back(c);
 
         }
     }
@@ -36,7 +36,7 @@ void Deck::createDeck(){
 void Deck::printCard(int i){
 
     Card* c = (*gameDeck)[i];
-            cout << c->Face << " of " << c->Symbol << " | " << c->Point << endl;
+    cout << c->Face << " of " << c->Symbol << " | " << c->Point << endl;
 }
 void Deck::shuffle()
 {

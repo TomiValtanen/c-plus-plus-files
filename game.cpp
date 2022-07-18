@@ -55,7 +55,7 @@ void game::startGame(Player* player, Player* dealer, Deck* deck){
     bool blackjackCheck=checkBlackjack(player,true);
 
     if (blackjackCheck==true){
-    blackjack(player,dealer,blackjackCheck,false,true);
+        blackjack(player,dealer,blackjackCheck,false,true);
 
     }
 
@@ -446,23 +446,23 @@ void game::busted(bool dealerOverLimit,bool playerOverLimit, Player* player, Pla
         winningPool=betPlayer+betPlayer;
     }
     if(blackjack==false){
-    if (dealerOverLimit==true){
-        bool win=true;
-        money(win,winningPool,player);
-        cout<<"Voitit "<< betPlayer<<" euroa ! Jakaja palauttaa laittamasi panoksen.\nPaina Enter jatkaaksesi.";
-        getch();
+        if (dealerOverLimit==true){
+            bool win=true;
+            money(win,winningPool,player);
+            cout<<"Voitit "<< betPlayer<<" euroa ! Jakaja palauttaa laittamasi panoksen.\nPaina Enter jatkaaksesi.";
+            getch();
 
-    }
-    else if(playerOverLimit==true){
-        showHands(player,dealer,split);
-        cout<<"Havisit "<< betPlayer << " euroa !\nPaina Enter jatkaaksesi.";
-        getch();
-    }
-    else{
-        winningConditions(player,dealer,split,firsthand);
-        cout << "\n \nPaina Enter jatkaaksesi.";
-        getch();
-    }
+        }
+        else if(playerOverLimit==true){
+            showHands(player,dealer,split);
+            cout<<"Havisit "<< betPlayer << " euroa !\nPaina Enter jatkaaksesi.";
+            getch();
+        }
+        else{
+            winningConditions(player,dealer,split,firsthand);
+            cout << "\n \nPaina Enter jatkaaksesi.";
+            getch();
+        }
     }
     else{
         winningPool=(betPlayer*1.5)+betPlayer;
@@ -673,7 +673,7 @@ void game::splittingHand(Player* player, Player* dealer,vector <Card*>* playingC
 
 
         }
-             if(splitPlayerOverLimit==false || playerOverLimit==false){
+        if(splitPlayerOverLimit==false || playerOverLimit==false){
             // näyttää jakajan toisen kortin ja siirtää sen jakajan käteen.
             moveFaceDownCard(dealer);
 
@@ -696,29 +696,29 @@ void game::splittingHand(Player* player, Player* dealer,vector <Card*>* playingC
             showHands(player,dealer,split);
             busted(dealerOverLimit,splitPlayerOverLimit,player,dealer,split,false,splitBlackjack);
 
-             }
-             else if(splitPlayerOverLimit==true && playerOverLimit==true){
-                 bool dealerOverLimit=dealerTurn(playerOverLimit,playingCards,player,dealer,split);
-                 //Tarkistaa onko kumpikaan jakaja tai pelaaja "Bust" , jos ei niin tavallisten sääntöjen mukaan kumpi voittaa kierroksen.
-                 cout<<"\nEnsimmaisen kaden tarkastus : \n";
-                 cout << "\n \nPaina Enter jatkaaksesi.";
-                 getch();
-                 system("cls");
-                 showHands(player,dealer,split);
-                 busted(dealerOverLimit,playerOverLimit,player,dealer,split,true,blackjackCheck);
-
-
-                 dealerOverLimit=dealerTurn(splitPlayerOverLimit,playingCards,player,dealer,split);
-                 //Tarkistaa onko kumpikaan jakaja tai pelaaja "Bust" , jos ei niin tavallisten sääntöjen mukaan kumpi voittaa kierroksen.
-                 cout<<"\nToisen kaden tarkastus : \n";
-                 cout << "\n \nPaina Enter jatkaaksesi.";
-                 getch();
-                 system("cls");
-                 showHands(player,dealer,split);
-                 busted(dealerOverLimit,splitPlayerOverLimit,player,dealer,split,false,splitBlackjack);
-             }
-             }
         }
+        else if(splitPlayerOverLimit==true && playerOverLimit==true){
+            bool dealerOverLimit=dealerTurn(playerOverLimit,playingCards,player,dealer,split);
+            //Tarkistaa onko kumpikaan jakaja tai pelaaja "Bust" , jos ei niin tavallisten sääntöjen mukaan kumpi voittaa kierroksen.
+            cout<<"\nEnsimmaisen kaden tarkastus : \n";
+            cout << "\n \nPaina Enter jatkaaksesi.";
+            getch();
+            system("cls");
+            showHands(player,dealer,split);
+            busted(dealerOverLimit,playerOverLimit,player,dealer,split,true,blackjackCheck);
+
+
+            dealerOverLimit=dealerTurn(splitPlayerOverLimit,playingCards,player,dealer,split);
+            //Tarkistaa onko kumpikaan jakaja tai pelaaja "Bust" , jos ei niin tavallisten sääntöjen mukaan kumpi voittaa kierroksen.
+            cout<<"\nToisen kaden tarkastus : \n";
+            cout << "\n \nPaina Enter jatkaaksesi.";
+            getch();
+            system("cls");
+            showHands(player,dealer,split);
+            busted(dealerOverLimit,splitPlayerOverLimit,player,dealer,split,false,splitBlackjack);
+        }
+    }
+}
 
 
 // koriste teksti , jonka alla näkyy pelaajan nimi, rahatilanne, ensimmäisen käden panos ja myös toisen , jos pääsee splittiin
@@ -782,19 +782,19 @@ void game::saveScore(Player* player){
     }
     writeFile.close();
     if(newrecord==true){
-    fstream myFile;
-    myFile.open("HiScore.txt",ios::out);
-    if(myFile.is_open()){
-        myFile<<"Ennatykset\n";
-        myFile<<"Nimimerkki:     Pisteet:\n";
-        myFile.close();
-    }
-    myFile.open("HiScore.txt",ios::app);
-    if(myFile.is_open()){
-        myFile<<player->name<<"            "<<score<<"\n";
-        myFile.close();
+        fstream myFile;
+        myFile.open("HiScore.txt",ios::out);
+        if(myFile.is_open()){
+            myFile<<"Ennatykset\n";
+            myFile<<"Nimimerkki:     Pisteet:\n";
+            myFile.close();
+        }
+        myFile.open("HiScore.txt",ios::app);
+        if(myFile.is_open()){
+            myFile<<player->name<<"            "<<score<<"\n";
+            myFile.close();
 
-    }
+        }
     }
 }
 //Blackjack tarkistus
@@ -829,7 +829,7 @@ void game::blackjack(Player* player, Player* dealer,bool blackjack,bool split,bo
             winningPool=(bet*1.5)+bet;
         }
         else{
-        winningPool=(bet*1.5)+bet;
+            winningPool=(bet*1.5)+bet;
         }
         cout<<"Sinä sait blackjackin ja voitit "<<bet*1.5 <<" \n\n";
         money(true,winningPool,player);

@@ -11,27 +11,29 @@ void rules();
 bool menu();
 void blackjack();
 void hiScore();
+void file();
 
 int main()
 {
-bool gameSession=menu();
+    file();
+    bool gameSession=menu();
 
     if(gameSession==true){
-    game* startGame=new game();
-    delete startGame;
-    do{
-    int continueGame=newGame();
-        gameSession=menu();
-    if(continueGame==1 && gameSession==true){
+        game* startGame=new game();
+        delete startGame;
+        do{
+            int continueGame=newGame();
+            gameSession=menu();
+            if(continueGame==1 && gameSession==true){
 
-        game* Game=new game();
-        delete Game;
-    }
-    else{
-        gameSession=false;
-    }
-}
-    while(gameSession==true);
+                game* Game=new game();
+                delete Game;
+            }
+            else{
+                gameSession=false;
+            }
+        }
+        while(gameSession==true);
     }
     return 0;
 }
@@ -43,24 +45,24 @@ int newGame(){
     bool validNumber=false;
     cout<<"Halutko pelata uudestaan ? 1.Kylla / 2.Ei : ";
     do{
-    cin>>choose;
-    cout<<endl;
-  switch (choose){
-  case 1:
-      validNumber=true;
-      break;
-  case 2:
-      validNumber=true;
-      break;
-  default:
-      cout<<"syota vaadittu numero 1 tai 2.\n";
-      cin.clear();
-      cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    }
+        cin>>choose;
+        cout<<endl;
+        switch (choose){
+        case 1:
+            validNumber=true;
+            break;
+        case 2:
+            validNumber=true;
+            break;
+        default:
+            cout<<"syota vaadittu numero 1 tai 2.\n";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
     }
     while(validNumber==false);
-return choose;
-    }
+    return choose;
+}
 void gameMenu(){
 
     cout<<"_________________________________________________________________________________________\n";
@@ -118,8 +120,8 @@ bool menu(){
             getch();
         }
         else if(choice==4){
-         gameSession=false;
-         break;
+            gameSession=false;
+            break;
         }
         else {
             cout<<"Sinun taytyy painaa 1 , 2 , 3 tai 4 jatkaaksesi!";
@@ -131,26 +133,30 @@ bool menu(){
     return gameSession;
 }
 void blackjack(){
-cout<<"  _______  __        _____      ______  __    ___     _____   ______    ______  __    __\n";
-cout<<" /####### /##|      /######    /######|/##|  /## |   /#####| /######   /###### /##|  /##\n";
-cout<<"| ##__  #| ##|     /##__  ##  /##___ #| ##| /## /   |__  ##|/##__  ## /##__  #| ##| /##/\n";
-cout<<"| ##  | #| ##|    | ##| | ## | ##|  |#| ##|/## /       | ##| ##| | ##| ##| |_#| ##|/##/ \n";
-cout<<"| #######| ##|    | ######## | ##|    | ##### /   __   | ##| ########| ##|    | #####/  \n";
-cout<<"| ##__  #| ##|    | ## __ ## | ##|   _| ##| ##|  /##|  | ##| ##__  ##| ##|    | ##| ##|  \n";
-cout<<"| ##  | #| ##|____| ## | |## | ##|__|#| ##| ##| | ##|__| ##| ##| | ##| ##|__ #| ##| ##| \n";
-cout<<"| #######| #######| ## | |## |  ######| ## | ##|| ########/| ##| | ##|  ######| ## | ##| \n";
-cout<<"|_______/|________|___/  |__/|_______/|__/  |__/|________/ |__/  |__/|______/ |__/  |__/ \n\n";
+    cout<<"  _______  __        _____      ______  __    ___     _____   ______    ______  __    __\n";
+    cout<<" /####### /##|      /######    /######|/##|  /## |   /#####| /######   /###### /##|  /##\n";
+    cout<<"| ##__  #| ##|     /##__  ##  /##___ #| ##| /## /   |__  ##|/##__  ## /##__  #| ##| /##/\n";
+    cout<<"| ##  | #| ##|    | ##| | ## | ##|  |#| ##|/## /       | ##| ##| | ##| ##| |_#| ##|/##/ \n";
+    cout<<"| #######| ##|    | ######## | ##|    | ##### /   __   | ##| ########| ##|    | #####/  \n";
+    cout<<"| ##__  #| ##|    | ## __ ## | ##|   _| ##| ##|  /##|  | ##| ##__  ##| ##|    | ##| ##|  \n";
+    cout<<"| ##  | #| ##|____| ## | |## | ##|__|#| ##| ##| | ##|__| ##| ##| | ##| ##|__ #| ##| ##| \n";
+    cout<<"| #######| #######| ## | |## |  ######| ## | ##|| ########/| ##| | ##|  ######| ## | ##| \n";
+    cout<<"|_______/|________|___/  |__/|_______/|__/  |__/|________/ |__/  |__/|______/ |__/  |__/ \n\n";
 }
 
 void hiScore(){
-fstream myFile;
-myFile.open("HiScore.txt",ios::in);
-if(myFile.is_open()){
-    string line;
-    while(getline(myFile,line)){
-        cout<<line<<endl;
+    fstream myFile;
+    myFile.open("HiScore.txt",ios::in);
+    if(myFile.is_open()){
+        string line;
+        while(getline(myFile,line)){
+            cout<<line<<endl;
+        }
+        myFile.close();
     }
-    myFile.close();
 }
+void file(){
+    ofstream MyFile("Score.txt");
+    MyFile << 0;
+    MyFile.close();
 }
-
