@@ -21,7 +21,7 @@ memory leakkejä, mutta ei sekään lähtenyt oikein toimimaan eikä näyttämä
 
 Mitä olisin tehnyt toisin:
 Tässä ei vielä osaa semmosia ajatella kunnolla. Ei ole niin paljoa tätä koodaamista tullut, mutta varmasti vähän ajan kuluttua kun palaa tähän projektiin uudestaan ja tutkii sitä
-niin varmasti huomaa asioita mitkä ois kannattanu tehdä toisin. Kokonaisuutta varmasti ois voinu tarkemmin miettiä etenkin, kun tahdoin laittaa nuo splitit ja muut sinne.
+niin varmasti huomaa asioita mitkä ois kannattanu tehdä toisin. Kokonaisuutta varmasti ois voinu tarkemmin miettiä etenkin, kun tahdoin laittaa nuo splitit ja muut sinne.Split functiota olisi voinut kovastikkin miettiä eritavalla ja sitä kokonaisuutta miten tekee insurancet ja double downki sinne. Myös olisin voinut paremmin tehdä nuo pelaajan ja jakajan. Vaikka perintää hyödyntäen paremmin ihan ominan classeina varmasti olisivat toimineet hyvin.
 Kaiken kaikkiaan oli itsestä mukava tämän projektin kanssa tutkia.
 Aikaa tuli kyllä käytettyä omasta mielestä paljonki kyseiseen projektiin vaan tuntui ,että aina löytyi monia erilaisia vaihtoehtoja tehdä asia toisin.
 Monet asiat oli omasta mielestä vähän piilossa ja niitä sai etsiä paljonkin internetin ihmeellisestä maailmasta.
