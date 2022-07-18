@@ -78,7 +78,7 @@ void game::startGame(Player* player, Player* dealer, Deck* deck){
                 //Jakaja nostaa kortteja siihen asti ,että kädessä on 17+ korttien arvo tai "Bust".
                 bool dealerOverLimit=dealerTurn(false,playingCards,player,dealer,split);
                 //Tarkistaa onko kumpikaan jakaja tai pelaaja "Bust" , jos ei niin tavallisten sääntöjen mukaan kumpi voittaa kierroksen.
-                busted(dealerOverLimit,false,player,dealer,split,true);
+                busted(dealerOverLimit,false,player,dealer,split,true,blackjackCheck);
             }
 
             else{
@@ -97,7 +97,7 @@ void game::startGame(Player* player, Player* dealer, Deck* deck){
                 //Jakaja nostaa kortteja siihen asti ,että kädessä on 17+ korttien arvo tai "Bust".
                 bool dealerOverLimit=dealerTurn(playerOverLimit,playingCards,player,dealer,split);
                 //Tarkistaa onko kumpikaan jakaja tai pelaaja "Bust" , jos ei niin tavallisten sääntöjen mukaan kumpi voittaa kierroksen.
-                busted(dealerOverLimit,playerOverLimit,player,dealer,split,true);
+                busted(dealerOverLimit,playerOverLimit,player,dealer,split,true,blackjackCheck);
 
             }
         }
@@ -434,7 +434,7 @@ bool game::dealerTurn(bool PlayerOverlimit,vector <Card*>* playingCards , Player
     return dealerOverLimit;
 }
 //Tarkistaa onko menty menty yli 21 pisteet vai mennäänkö tavallisen voitonjaon kautta
-void game::busted(bool dealerOverLimit,bool playerOverLimit, Player* player, Player* dealer,bool split ,bool firsthand){
+void game::busted(bool dealerOverLimit,bool playerOverLimit, Player* player, Player* dealer,bool split ,bool firsthand,bool blackjack){
     int betPlayer=player->getBet();
     int betDealer=dealer->getBet();
     int winningPool=betPlayer+betDealer;
@@ -445,7 +445,7 @@ void game::busted(bool dealerOverLimit,bool playerOverLimit, Player* player, Pla
     else if(split==true && firsthand==true){
         winningPool=betPlayer+betPlayer;
     }
-
+    if(blackjack==false){
     if (dealerOverLimit==true){
         bool win=true;
         money(win,winningPool,player);
@@ -461,6 +461,14 @@ void game::busted(bool dealerOverLimit,bool playerOverLimit, Player* player, Pla
     else{
         winningConditions(player,dealer,split,firsthand);
         cout << "\n \nPaina Enter jatkaaksesi.";
+        getch();
+    }
+    }
+    else{
+        winningPool=(betPlayer*1.5)+betPlayer;
+        cout<<"Sait blackjackin! Voitit "<<betPlayer*1.5<<" euroa.";
+
+        money(true,winningPool,player);
         getch();
     }
 
@@ -642,10 +650,9 @@ void game::splittingHand(Player* player, Player* dealer,vector <Card*>* playingC
         bool splitPlayerOverLimit=false;
 
 
-        if(blackjackCheck==true){
-        blackjack(player,dealer,blackjackCheck,split,true);
-        }
-        else{
+        if(blackjackCheck==false){
+
+
             bool doubleCheck=doubleDown(player,dealer,playingCards,blackjackCheck,split,true);
             if(doubleCheck==false){
 
@@ -656,10 +663,8 @@ void game::splittingHand(Player* player, Player* dealer,vector <Card*>* playingC
         }
 
         bool splitBlackjack=checkBlackjack(player,false);
-        if(splitBlackjack==true){
-        blackjack(player,dealer,splitBlackjack,split,true);
-        }
-        else{
+        if(splitBlackjack==false){
+
             bool splitDoubleCheck=doubleDown(player,dealer,playingCards,splitBlackjack,split,false);
             if(splitDoubleCheck==false){
                 cout<<"Toisen kaden vuoro.";
@@ -668,7 +673,7 @@ void game::splittingHand(Player* player, Player* dealer,vector <Card*>* playingC
 
 
         }
-             if(blackjackCheck==true && splitBlackjack==false && splitPlayerOverLimit==false){
+           /*  if(blackjackCheck==true && splitBlackjack==false && splitPlayerOverLimit==false){
 
                  bool dealerOverLimit=dealerTurn(splitPlayerOverLimit,playingCards,player,dealer,split);
                  //Tarkistaa onko kumpikaan jakaja tai pelaaja "Bust" , jos ei niin tavallisten sääntöjen mukaan kumpi voittaa kierroksen.
@@ -679,30 +684,30 @@ void game::splittingHand(Player* player, Player* dealer,vector <Card*>* playingC
                  //Tarkistaa onko kumpikaan jakaja tai pelaaja "Bust" , jos ei niin tavallisten sääntöjen mukaan kumpi voittaa kierroksen.
                  busted(dealerOverLimit,playerOverLimit,player,dealer,split,true);
 
-             }
+             }*/
              if(splitPlayerOverLimit==false || playerOverLimit==false){
             // näyttää jakajan toisen kortin ja siirtää sen jakajan käteen.
             moveFaceDownCard(dealer);
 
             bool dealerOverLimit=dealerTurn(playerOverLimit,playingCards,player,dealer,split);
             //Tarkistaa onko kumpikaan jakaja tai pelaaja "Bust" , jos ei niin tavallisten sääntöjen mukaan kumpi voittaa kierroksen.
-            busted(dealerOverLimit,playerOverLimit,player,dealer,split,true);
+            busted(dealerOverLimit,playerOverLimit,player,dealer,split,true,blackjackCheck);
 
 
             dealerOverLimit=dealerTurn(splitPlayerOverLimit,playingCards,player,dealer,split);
             //Tarkistaa onko kumpikaan jakaja tai pelaaja "Bust" , jos ei niin tavallisten sääntöjen mukaan kumpi voittaa kierroksen.
-            busted(dealerOverLimit,splitPlayerOverLimit,player,dealer,split,false);
+            busted(dealerOverLimit,splitPlayerOverLimit,player,dealer,split,false,splitBlackjack);
 
              }
              else if(splitPlayerOverLimit==true && playerOverLimit==true){
                  bool dealerOverLimit=dealerTurn(playerOverLimit,playingCards,player,dealer,split);
                  //Tarkistaa onko kumpikaan jakaja tai pelaaja "Bust" , jos ei niin tavallisten sääntöjen mukaan kumpi voittaa kierroksen.
-                 busted(dealerOverLimit,playerOverLimit,player,dealer,split,true);
+                 busted(dealerOverLimit,playerOverLimit,player,dealer,split,true,blackjackCheck);
 
 
                  dealerOverLimit=dealerTurn(splitPlayerOverLimit,playingCards,player,dealer,split);
                  //Tarkistaa onko kumpikaan jakaja tai pelaaja "Bust" , jos ei niin tavallisten sääntöjen mukaan kumpi voittaa kierroksen.
-                 busted(dealerOverLimit,splitPlayerOverLimit,player,dealer,split,false);
+                 busted(dealerOverLimit,splitPlayerOverLimit,player,dealer,split,false,splitBlackjack);
              }
              }
         }

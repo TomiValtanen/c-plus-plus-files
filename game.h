@@ -35,7 +35,7 @@ public:
     void money(bool win , int bet,Player* player);
     bool playerTurn(vector <Card*>* playingCards , Player* player,Player* dealer,bool split,bool firsthand);
     bool dealerTurn(bool PlayerOverlimit,vector <Card*>* playingCards , Player* player,Player* dealer,bool split);
-    void busted(bool dealerOverLimit,bool playerOverLimit, Player* player, Player* dealer,bool split,bool firsthand);
+    void busted(bool dealerOverLimit,bool playerOverLimit, Player* player, Player* dealer,bool split,bool firsthand,bool blackjack);
     void nextTurn(Player* player, Player* dealer,Deck* d);
     bool checkInsurance(Player* dealer);
     bool insurance(bool Insurance,Player* dealer, Player* player);

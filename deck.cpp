@@ -43,3 +43,4 @@ void Deck::shuffle()
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     std::shuffle(this->gameDeck->begin(), this->gameDeck->end(), std::default_random_engine(seed));
 }
+

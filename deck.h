@@ -13,6 +13,7 @@ class Deck
 {
 public:
     Deck();
+
    ~Deck();
     void createDeck();
     vector<Card*>* getCards();
@@ -20,6 +21,7 @@ public:
     //Testaamiseen
     void printCard(int i);
     void shuffle();
+
 
     vector <Card*>* gameDeck;
 
