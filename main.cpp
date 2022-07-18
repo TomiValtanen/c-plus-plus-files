@@ -11,11 +11,12 @@ void rules();
 bool menu();
 void blackjack();
 void hiScore();
+void file();
 
 int main()
 {
 bool gameSession=menu();
-
+    file();
     if(gameSession==true){
     game* startGame=new game();
     delete startGame;
@@ -152,5 +153,11 @@ if(myFile.is_open()){
     }
     myFile.close();
 }
+}
+
+void file(){
+    ofstream MyFile("Score.txt");
+    MyFile << 0;
+    MyFile.close();
 }
 

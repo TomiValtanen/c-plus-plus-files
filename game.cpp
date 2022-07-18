@@ -751,6 +751,7 @@ void game::saveScore(Player* player){
     int highscore = 0;
     int score=player->getHighScore();
     bool newrecord=false;
+
     ifstream readFile;
     readFile.open("Score.txt");
     if(readFile.is_open()){
