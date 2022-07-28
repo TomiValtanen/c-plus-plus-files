@@ -539,6 +539,12 @@ bool game::insurance(bool Insurance, Player* dealer, Player* player){
 
             }
         }
+        else if(chooce==2){
+            blackjackDealer=false;
+            cout<<"\nEt halua ottaa insurancea. Peli jatkuu normaalisti.";
+            cout << "\n \nPaina Enter jatkaaksesi.";
+            getch();
+        }
         else{
             if(player->getMoney() < insuranceBet)
             {
@@ -764,15 +770,16 @@ void game::saveScore(Player* player){
     int highscore = 0;
     int score=player->getHighScore();
     bool newrecord=false;
-    ifstream readFile;
-    readFile.open("Score.txt");
+    fstream readFile;
+    readFile.open("Score.txt",ios::in);
     if(readFile.is_open()){
         while(!readFile.eof()){
             readFile>>highscore;
         }
     }
     readFile.close();
-    fstream writeFile("Score.txt");
+    fstream writeFile;
+    writeFile.open("Score.txt",ios::out);
     if(writeFile.is_open()){
         if(score>highscore){
             highscore=score;
@@ -831,7 +838,7 @@ void game::blackjack(Player* player, Player* dealer,bool blackjack,bool split,bo
         else{
             winningPool=(bet*1.5)+bet;
         }
-        cout<<"Sinä sait blackjackin ja voitit "<<bet*1.5 <<" \n\n";
+        cout<<"Sina sait blackjackin ja voitit "<<bet*1.5 <<" \n\n";
         money(true,winningPool,player);
         cout << "\n \nPaina Enter jatkaaksesi.";
         getch();

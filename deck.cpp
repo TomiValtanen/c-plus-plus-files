@@ -6,9 +6,6 @@ Deck::Deck()
     createDeck();
     shuffle();
 }
-Deck::~Deck(){
-
-}
 vector<Card*>* Deck::getCards(){
     return this->gameDeck;
 }

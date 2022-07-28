@@ -28,10 +28,6 @@ public:
     void setHighScore(int money);
     int getHighScore();
 
-
-
-
-
     string name;
 
     vector <Card*>* hand;

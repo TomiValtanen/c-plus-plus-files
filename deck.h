@@ -13,8 +13,6 @@ class Deck
 {
 public:
     Deck();
-
-    ~Deck();
     void createDeck();
     vector<Card*>* getCards();
 

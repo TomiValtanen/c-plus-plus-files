@@ -156,7 +156,23 @@ void hiScore(){
     }
 }
 void file(){
-    ofstream MyFile("Score.txt");
-    MyFile << 0;
-    MyFile.close();
+    int highscore=0;
+    int score=0;
+    fstream readFile;
+    readFile.open("Score.txt",ios::in);
+    if(readFile.is_open()){
+        while(!readFile.eof()){
+            readFile>>highscore;
+        }
+    }
+    readFile.close();
+    fstream writeFile;
+    writeFile.open("Score.txt",ios::out);
+    if(writeFile.is_open()){
+        if(score>highscore){
+            highscore=score;
+        }
+        writeFile<<highscore;
+    }
+    writeFile.close();
 }
