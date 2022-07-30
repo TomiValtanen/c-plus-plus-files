@@ -89,7 +89,7 @@ void rules(){
     blackjack();
     cout<<"=====================================================================================================================\n";
     cout<<"                                                  SAANNOT                                                            \n\n\n";
-    cout<<"Pelaaja pelaa pankkia (jakaja) vastaan.Jakaja jakaa pelaajalle kaksi korttia kuvapuoli \nylospain ja itselleen kaksi korttia, joista toisen kuvapuoli ylospain ja toisen kuvapuoli alaspain.\nPelaaja ilmoittaa, haluaako han uuden kortin. Jakaja jakaa, kunnes pelaaja ei halua enaa lisaa \nkortteja tai korttien pistemaara on yli kaksikymmentayksi.\nKun jokainen pelaaja pelipoydassa on tehnyt valintansa, jakaja paljastaa toisen korttinsa ja \nottaa itselleen lisakortteja, mikali hanen katensa arvo on 16 tai pienempi.\nKun jakajalla on vahintaan 17, han ei saa ottaa enaa lisaa kortteja. Pelin voittaa se, jolla korttien yhteislukema on suurempi menematta yli kahtakymmentayhta tai tasan 21.\n Kahdella ensimmaisella kortilla saatu pistemaara kaksikymmentayksi (assa ja kuvakortti/kymppi) on nimeltaan blackjack,\njos pelaajalla ja jakajalla on yhteislukema sama, saa laittamansa panoksen takaisin.\nJos yhteislukema on suurempi kuin kaksikymmentayksi, sen summan saanut haviaa.\nPelaajan on mahdollista ottaa pelin aikana insurance, jos jakajan paalimmainen kortti on assa.\nSlipt on mahdollista, jos ensimmaiset kaksi korttia ovat samat kuva korteissa taytyy olla kunkku ja kunkku esimerkiksi.\nDouble down on mahdollista jos ensimmaisen kahden kortin yhteisumma on 9 ,10 tai 11.\n";
+    cout<<"Pelaaja pelaa pankkia (jakaja) vastaan.Jakaja jakaa pelaajalle kaksi korttia kuvapuoli \nylospain ja itselleen kaksi korttia, joista toisen kuvapuoli ylospain ja toisen kuvapuoli alaspain.\nPelaaja ilmoittaa, haluaako han uuden kortin. Jakaja jakaa, kunnes pelaaja ei halua enaa lisaa \nkortteja tai korttien pistemaara on yli kaksikymmentayksi.\nKun jokainen pelaaja pelipoydassa on tehnyt valintansa, jakaja paljastaa toisen korttinsa ja \nottaa itselleen lisakortteja, mikali hanen katensa arvo on 16 tai pienempi.\nKun jakajalla on vahintaan 17, han ei saa ottaa enaa lisaa kortteja. Pelin voittaa se, jolla korttien yhteislukema on suurempi menematta yli kahtakymmentayhta tai tasan 21.\n Kahdella ensimmaisella kortilla saatu pistemaara kaksikymmentayksi (assa ja kuvakortti/kymppi) on nimeltaan blackjack,\njos pelaajalla ja jakajalla on yhteislukema sama, saa laittamansa panoksen takaisin.\nJos yhteislukema on suurempi kuin kaksikymmentayksi, sen summan saanut haviaa.\nPelaajan on mahdollista ottaa pelin aikana insurance, jos jakajan paalimmainen kortti on assa.\nSlipt on mahdollista, jos ensimmaiset kaksi korttia ovat samat kuva korteissa taytyy olla kunkku ja kunkku esimerkiksi.\nDouble down on mahdollista jos ensimmaisen kahden kortin yhteisumma on 9 ,10 tai 11.\nEnnatyksissa pisteina toimivat pelin aikana keraamasi rahasumma.\nPelin aikana saamasi suurin rahasumma tulee pisteisiin , kun rahasi ovat loppuneet.";
     cout << "\n \nPaina Enter jatkaaksesi takaisin alkuun.";
     cin.ignore();
     cin.ignore();
@@ -138,10 +138,10 @@ void blackjack(){
     cout<<"| ##__  #| ##|     /##__  ##  /##___ #| ##| /## /   |__  ##|/##__  ## /##__  #| ##| /##/\n";
     cout<<"| ##  | #| ##|    | ##| | ## | ##|  |#| ##|/## /       | ##| ##| | ##| ##| |_#| ##|/##/ \n";
     cout<<"| #######| ##|    | ######## | ##|    | ##### /   __   | ##| ########| ##|    | #####/  \n";
-    cout<<"| ##__  #| ##|    | ## __ ## | ##|   _| ##| ##|  /##|  | ##| ##__  ##| ##|    | ##| ##|  \n";
-    cout<<"| ##  | #| ##|____| ## | |## | ##|__|#| ##| ##| | ##|__| ##| ##| | ##| ##|__ #| ##| ##| \n";
+    cout<<"| ##__  #| ##|    | ## __ ## | ##|   _| ##| ##|  /##|  | ##| ##__  ##| ##|   _| ##| ##|  \n";
+    cout<<"| ##  | #| ##|____| ## | |## | ##|__|#| ##| ##| | ##|__| ##| ##| | ##| ##|__|#| ##| ##| \n";
     cout<<"| #######| #######| ## | |## |  ######| ## | ##|| ########/| ##| | ##|  ######| ## | ##| \n";
-    cout<<"|_______/|________|___/  |__/|_______/|__/  |__/|________/ |__/  |__/|______/ |__/  |__/ \n\n";
+    cout<<"|_______/|________|___/  |__/|_______/|__/  |__/|________/ |__/  |__/|_______/|__/  |__/ \n\n";
 }
 
 void hiScore(){

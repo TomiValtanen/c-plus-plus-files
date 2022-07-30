@@ -13,16 +13,18 @@ class Deck
 {
 public:
     Deck();
+    Deck(vector <Card>* playingCards);
+    Deck(vector <Card>* playingCards,vector <Card> discardDeck);
     void createDeck();
-    vector<Card*>* getCards();
+    vector<Card> getCards();
 
     //Testaamiseen
     void printCard(int i);
     void shuffle();
 
 
-
-    vector <Card*>* gameDeck;
+private:
+    vector<Card> gameDeck;
 
 };
 

@@ -1,6 +1,6 @@
 #include "player.h"
 
-Player::Player(string name,vector <Card*>* hand ,vector <Card*>* splithand,int money)
+Player::Player(string name,vector <Card> hand ,vector <Card> splithand,int money)
 {
     this->name=name;
     this->hand=hand;
@@ -11,11 +11,13 @@ Player::Player(string name,vector <Card*>* hand ,vector <Card*>* splithand,int m
     this-> highScore=0;
 
 }
-Player::Player(string name , vector <Card*>* hand,vector <Card*>* dealerCard){
+Player::Player(string name , vector <Card> hand,vector <Card> dealerCard){
     this->name=name;
     this->hand=hand;
     this->dealerCard=dealerCard;
     this->bet=0;
+    this->discardDeck=vector <Card>();
+    this->rounds=0;
 }
 
 void Player::setMoney(int bet){
@@ -58,4 +60,23 @@ void Player::setHighScore(int money){
 }
 int Player::getHighScore(){
     return highScore;
+}
+
+void Player::setCard(Card c,bool firsthand){
+
+    if(firsthand==true){
+    hand.push_back(c);
+    }
+    else{
+        splitHand.push_back(c);
+    }
+}
+void Player::setRound(int round){
+    rounds=round;
+}
+void Player::addRound(int round){
+    rounds+=round;
+}
+int Player::getRound(){
+    return rounds;
 }
