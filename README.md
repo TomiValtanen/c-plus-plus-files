@@ -1,17 +1,17 @@
 # Blackjack korttipeli.
 
 ## Pelinkulku
-Ruudulla näkyy ohjeet koko aikaisesti ja ne ohjaavat pelaajaa.
-Tarkoituksena on saada enemmän pisteitä mitä jakaja kuitenkaan menemättä 21 pisteen yli.
+Ruudulla näkyy ohjeet koko aikaisesti ja ne ohjaavat pelaajaa.\
+Tarkoituksena on saada enemmän pisteitä mitä jakaja kuitenkaan menemättä 21 pisteen yli.\
 Pisteytys:
 - Ässä = 1 tai 11 riippuen meneekö pelaajan pisteet yli 21 .
 - Numerokortit antavat osoittamansa luvun.
-- kuvakortit (jätkä , akka , kunkku) antavat kaikki 10 pistettä.
-Pelissä panoksen suuruus on 10 - 100.
-Insurance on mahdollista ottaa ja se maksaa puolet alkuperäisestä panoksesta.
-Split on myös mahdollinen ja sen voi ottaa, jos alussa jaettavat kaksi korttia ovat samanlaiset. Splitin aikana voi double down.
-Double down on myös mahdollista splitin ulkopuolella ja tämä onnistuu, ensimmäisen kahden kortin summa on 9 , 10 tai 11. Sen jälkeen jaetaan 1 kortti ja katsotaan kumpi voittaa.
-Sitten on hit / stand mahdollisuus.
+- kuvakortit (jätkä , akka , kunkku) antavat kaikki 10 pistettä.\
+Pelissä panoksen suuruus on 10 - 100.\
+Insurance on mahdollista ottaa ja se maksaa puolet alkuperäisestä panoksesta.\
+Split on myös mahdollinen ja sen voi ottaa, jos alussa jaettavat kaksi korttia ovat samanlaiset. Splitin aikana voi double down.\
+Double down on myös mahdollista splitin ulkopuolella ja tämä onnistuu, ensimmäisen kahden kortin summa on 9 , 10 tai 11. Sen jälkeen jaetaan 1 kortti ja katsotaan kumpi voittaa.\
+Sitten on hit / stand mahdollisuus.\
 Pelin ennätys perustuu siihen paljon oli parhaillaan rahaa pelin aikana.
 
 ## Projektissa haastavaa:
