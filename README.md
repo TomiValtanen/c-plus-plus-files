@@ -4,8 +4,8 @@
 Ruudulla näkyy ohjeet koko aikaisesti ja ne ohjaavat pelaajaa.\
 Tarkoituksena on saada enemmän pisteitä mitä jakaja kuitenkaan menemättä 21 pisteen yli.\
 ## Pisteytys ja panostus:
-Ässä = 1 tai 11 riippuen meneekö pelaajan pisteet yli 21 .
-Numerokortit antavat osoittamansa luvun.
+Ässä = 1 tai 11 riippuen meneekö pelaajan pisteet yli 21 .\
+Numerokortit antavat osoittamansa luvun.\
 kuvakortit (jätkä , akka , kunkku) antavat kaikki 10 pistettä.\
 Pelissä panoksen suuruus on 10 - 100.
 ## Kierroksen aikana
@@ -17,6 +17,24 @@ Split mahdollisuus silloin, kun alussa jaettavat kaksi ensimmäistä korttia ova
 Double down mahdollista, kun alussa jaettujen korttien summa on 9 , 10 tai 11. \
 Sitten on hit / stand mahdollisuus.\
 Pelin ennätys perustuu siihen paljon oli parhaillaan rahaa pelin aikana.
+
+## Insurance
+Tarjotaan heti alussa , jos jakajalla on ässä näkyvänä. Maksaa puolet alkuperäisestäpanoksesta.\
+Jakaja tarkistaa toisen korttinsa onko siellä kortti arvoltaan 10 pistettä, jos näin on pelaaja voittaa insurance panoksensa tuplana, mutta häviää alkuperäisen panoksensa.\
+Peli jatkuu normaalisti eteenpäin, jos jakajan kortti ei ollut arvoltaan 10 pistettä, mutta pelaaja häviää tässä tapauksessa insurance panoksensa.
+
+## Split
+Pelaajan kaksi ensimmäistä korttia ovat samat (esim. Jätkä & jätkä), silloin tarjotaan mahdollista ottaa split.\
+Split maksaa saman verran mitä alkuperäinenpanos.\
+Pelaajan ottaessa split kortit jaetaan kahdeksi erilliseksi kädeksi ja niihin jaetaan sen jälkeen toiset kortit. Pelattavia käsiä voi olla tässä pelissä yhteensä 2.\
+Tämän jälkeen pelaajan on vielä mahdollista ottaa Double down , jos se on mahdolllista.\
+Panokset ovat omat molemmilla käsillä ja ne tarkastetaan erikseen.\
+
+## Double down
+Pelaajan kahden ensimmäisen kortin summa on 9 , 10 tai 11. Silloin tarjotaan mahdollisuutta ottaa double down.\
+Double down maksaa saman verran mitä alkuperäinenpanos.\
+Pelaajalle jaetaan vain yksi kortti, eikä hän saa nostaa enempää.
+
 
 ## Projektissa haastavaa:
 Alkuun pääseminen oli hankalaa ja tutustuminen itse peliin. En itse ole suuresti pelannut kyseistä peliä.
