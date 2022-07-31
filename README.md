@@ -1,5 +1,3 @@
-# c-plus-plus-files
-
 # Blackjack korttipeli.
 
 ## Pelinkulku
