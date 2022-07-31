@@ -2,7 +2,7 @@
 
 ## Pelinkulku
 Ruudulla näkyy ohjeet koko aikaisesti ja ne ohjaavat pelaajaa.\
-Tarkoituksena on saada enemmän pisteitä mitä jakaja kuitenkaan menemättä 21 pisteen yli.\\
+Tarkoituksena on saada enemmän pisteitä mitä jakaja kuitenkaan menemättä 21 pisteen yli.\
 **Pisteytys:**\
 Ässä = 1 tai 11 riippuen meneekö pelaajan pisteet yli 21 .
 Numerokortit antavat osoittamansa luvun.
