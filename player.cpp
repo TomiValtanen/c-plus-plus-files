@@ -11,6 +11,7 @@ Player::Player(string name,vector <Card> hand ,vector <Card> splithand,int money
     this-> highScore=0;
 
 }
+
 Player::Player(string name , vector <Card> hand,vector <Card> dealerCard){
     this->name=name;
     this->hand=hand;

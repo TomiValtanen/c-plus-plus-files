@@ -22,15 +22,15 @@ int main()
         game* startGame=new game();
         delete startGame;
         do{
-            int continueGame=newGame();
-            gameSession=menu();
-            if(continueGame==1 && gameSession==true){
-
+            int continueGame=newGame();          
+            if(continueGame==1){
+                gameSession=menu();
                 game* Game=new game();
                 delete Game;
             }
             else{
                 gameSession=false;
+
             }
         }
         while(gameSession==true);

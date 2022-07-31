@@ -42,12 +42,12 @@ void game::startGame(Player* player, Player* dealer, Deck* deck){
     betAmountCheck(player);
     playerDealerbet(player,dealer);
 
-    //Jaetaan aloitus kortit
+    //Jaetaan aloitus kortit annetaan pelaajalle ensimmäinen, toinen jakajalle ja kolmas pelaajalle
     pickCard(playingCards,player,1,true);
     pickCard(playingCards,dealer,1,true);
     pickCard(playingCards,player,1,true);
 
-    // Antaa jakajalle kortin mitä ei näytetä, ennenkuin jakaja aloittaa korttien nostamisen.
+    // neljäs kortti annetaan jakajalle kortin mitä ei näytetä, ennenkuin jakaja aloittaa korttien nostamisen.
     faceDownDealerCard(playingCards,dealer);
 
     showHands(player,dealer,false);
@@ -60,7 +60,7 @@ void game::startGame(Player* player, Player* dealer, Deck* deck){
     }
 
     else{
-        //Pelaajan ottamien korttien jälkeen annetaan mahdollisuus ottaa insurance , jos jakajalla on nakyva kortti assa.
+        //Pelaajan ottamien korttien jälkeen annetaan mahdollisuus ottaa insurance , jos jakajalla on nakyva kortti ässä.
         bool insu=checkInsurance(dealer);
         bool insuBlackJack=insurance(insu,dealer,player);
         //Split käy läpi myös double down mahdollisuuden omassa functiossaan ja siellä tapahtuu myös normaali korttien nosto ja voittojen jako.
@@ -83,7 +83,7 @@ void game::startGame(Player* player, Player* dealer, Deck* deck){
 
             else{
 
-                //Nostetaan kortteja sen verran ,että "Bust" tai pelaaja päättää itse lopettaa korttien nostamisen. Palauttaa arvon true / false.
+                //Nostetaan kortteja sen verran ,että "Bust" tai pelaaja päättää itse lopettaa korttien nostamisen.
                 bool playerOverLimit=playerTurn(playingCards,player,dealer,split,true);
 
 
@@ -102,7 +102,10 @@ void game::startGame(Player* player, Player* dealer, Deck* deck){
             }
         }
     }
-    //Tarkistetaan onko pelaajalla kyseistä summaa rahaa osallistua seuraavalle kierrokselle.
+    /*Tarkistetaan onko pelaajalla kyseistä summaa rahaa osallistua seuraavalle kierrokselle.
+     * Samalla katsotaan pistetilanne ja tehdään sen mukaiset tallennukset
+     * Jos ei ollut varoja seuraavalle kierrokselle tallennetaan pisteet.
+     */
     if(player->getMoney()>=10){
         checkScore(player);
         nextTurn(player, dealer, d,playingCards);
@@ -185,7 +188,9 @@ void game::showHands(Player* player, Player* dealer,bool split){
 
 }
 
-// Pisteiden lasku.
+/* Pisteiden lasku.
+ * Samalla katsotaan myös onko ässiä kädessä ja toimitaan pistetilanteiden mukaan eli onko soft hand vai ei.
+ */
 int game::totalPoints(Player* player,bool firsthand){
     Player* p=player;
     int points=0;
@@ -370,7 +375,7 @@ void game::money(bool win , int bet, Player* player){
         p->setMoney(-b);
     }
 }
-//Pelaajan vuoro nostaa kortteja pelaaja itse päättää milloin lopettaa
+//Pelaajan vuoro nostaa kortteja pelaaja itse päättää milloin lopettaa ellei korttien summa ole yli 21.
 bool game::playerTurn(vector <Card>* playingCards , Player* player,Player* dealer,bool split ,bool firsthand){
     bool playerOverLimit=false;
     bool playerTurn=true;
@@ -450,7 +455,7 @@ void game::busted(bool dealerOverLimit,bool playerOverLimit, Player* player, Pla
 
         }
         else if(playerOverLimit==true){
-            showHands(player,dealer,split);
+            //showHands(player,dealer,split);
             cout<<"\n===========================================================================================\n\n\n";
             cout<<"Havisit "<< betPlayer << " euroa !\nPaina Enter jatkaaksesi.";
             getch();
@@ -470,7 +475,10 @@ void game::busted(bool dealerOverLimit,bool playerOverLimit, Player* player, Pla
     }
 
 }
-//Seuraavalle kierrokselle meneminen
+/*Seuraavalle kierrokselle meneminen
+ * Syötetään kaikista käsistä kortit poistopakkaan
+ * Kierroksia , kun on tullut 5 yhteensä yhdistetään jäljellä oleva pakka ja poistopakka uudeksi pelipakaksi ja sekoitetaan se.
+ */
 void game::nextTurn(Player* player, Player* dealer,Deck* d,vector <Card>*playingCards){
 
     for (std::size_t i=0; i < player->hand.size();i++){
@@ -506,8 +514,12 @@ void game::nextTurn(Player* player, Player* dealer,Deck* d,vector <Card>*playing
         Deck* deck=new Deck(playingCards,dealer->discardDeck);
         dealer->discardDeck.clear();
         delete d;
-        cout<<"\n\nJakaja ottaa poistopakan ja kayttopakan. Sekoittaa ne keskenaan seuraavaa kierrosta varten.\n\n";
-        sleep(5);
+        system("cls");
+        printBlackjack(player);
+        cout<<"\n\nJakaja ottaa poistopakan ja kayttopakan. Sekoittaa ne keskenaan seuraavaa kierrosta varten.\n";
+        sleep(3);
+        cout<<"Kierros jatkuu aivan hetken kuluttua!";
+        sleep(2);
         startGame(player,dealer,deck);
     }
     else{
