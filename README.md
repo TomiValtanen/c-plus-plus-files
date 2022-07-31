@@ -28,7 +28,8 @@ Pelaajan kaksi ensimmäistä korttia ovat samat (esim. Jätkä & jätkä), sillo
 Split maksaa saman verran mitä alkuperäinenpanos.\
 Pelaajan ottaessa split kortit jaetaan kahdeksi erilliseksi kädeksi ja niihin jaetaan sen jälkeen toiset kortit. Pelattavia käsiä voi olla tässä pelissä yhteensä 2.\
 Tämän jälkeen pelaajan on vielä mahdollista ottaa Double down , jos se on mahdolllista.\
-Panokset ovat omat molemmilla käsillä ja ne tarkastetaan erikseen.\
+Panokset ovat omat molemmilla käsillä ja ne tarkastetaan erikseen.
+Pelaaja pelaa splitin kädet normaalisti ottamalla lisää kortteja, ellei ole ottanut double down jolloin hänelle on jaettu sille kädelle vain yksi kortti.
 
 ## Double down
 Pelaajan kahden ensimmäisen kortin summa on 9 , 10 tai 11. Silloin tarjotaan mahdollisuutta ottaa double down.\
