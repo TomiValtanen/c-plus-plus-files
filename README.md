@@ -2,12 +2,12 @@
 
 ## Pelinkulku
 Ruudulla näkyy ohjeet koko aikaisesti ja ne ohjaavat pelaajaa.\
-Tarkoituksena on saada enemmän pisteitä mitä jakaja kuitenkaan menemättä 21 pisteen yli.\
+Tarkoituksena on saada enemmän pisteitä mitä jakaja kuitenkaan menemättä 21 pisteen yli.
 ## Pisteytys ja panostus:
-Ässä = 1 tai 11 riippuen meneekö pelaajan pisteet yli 21 .\
-Numerokortit antavat osoittamansa luvun.\
-kuvakortit (jätkä , akka , kunkku) antavat kaikki 10 pistettä.\
-Pelissä panoksen suuruus on 10 - 100.
+**Ässä:**  1 tai 11 riippuen meneekö pelaajan pisteet yli 21 .\
+**Numerokortit:** antavat osoittamansa luvun.\
+**kuvakortit:** Jätkä , akka ja kunkku antavat kaikki 10 pistettä.\
+**Panos:** 10-100
 ## Kierroksen aikana
 Pelaajalle jaetaan kaksi korttia näkyville.\
 Jakajalle jaetaan myös kaksi korttia , mutta vain toinen on näkyvä.\
