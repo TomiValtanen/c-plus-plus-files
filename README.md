@@ -1,9 +1,12 @@
 # Blackjack korttipeli.
 
 ## Pelinkulku
-ruudulla näkyy ohjeet koko aikaisesti ja ne ohjaavat pelaajaa.
+Ruudulla näkyy ohjeet koko aikaisesti ja ne ohjaavat pelaajaa.
 Tarkoituksena on saada enemmän pisteitä mitä jakaja kuitenkaan menemättä 21 pisteen yli.
-Pisteitä saa seuraavasti Ässä = 1 tai 11 riippuen meneekö pelaajan pisteet yli 21 .Numerokortit antavat osoittamansa luvun ja kuvakortit (jätkä , akka , kunkku) antavat kaikki 10 pistettä.
+Pisteytys:
+- Ässä = 1 tai 11 riippuen meneekö pelaajan pisteet yli 21 .
+- Numerokortit antavat osoittamansa luvun.
+- kuvakortit (jätkä , akka , kunkku) antavat kaikki 10 pistettä.
 Pelissä panoksen suuruus on 10 - 100.
 Insurance on mahdollista ottaa ja se maksaa puolet alkuperäisestä panoksesta.
 Split on myös mahdollinen ja sen voi ottaa, jos alussa jaettavat kaksi korttia ovat samanlaiset. Splitin aikana voi double down.
