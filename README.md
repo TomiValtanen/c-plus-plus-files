@@ -3,14 +3,18 @@
 ## Pelinkulku
 Ruudulla näkyy ohjeet koko aikaisesti ja ne ohjaavat pelaajaa.\
 Tarkoituksena on saada enemmän pisteitä mitä jakaja kuitenkaan menemättä 21 pisteen yli.\
-**Pisteytys:**\
+## Pisteytys ja panostus:
 Ässä = 1 tai 11 riippuen meneekö pelaajan pisteet yli 21 .
 Numerokortit antavat osoittamansa luvun.
-kuvakortit (jätkä , akka , kunkku) antavat kaikki 10 pistettä.\\
-Pelissä panoksen suuruus on 10 - 100.\
+kuvakortit (jätkä , akka , kunkku) antavat kaikki 10 pistettä.\
+Pelissä panoksen suuruus on 10 - 100.
+## Kierroksen aikana
+Pelaajalle jaetaan kaksi korttia näkyville.\
+Jakajalle jaetaan myös kaksi korttia , mutta vain toinen on näkyvä.\
+Pelaaja aloittaa pelaamisen , kun pelaaja on lopettanut pelaamisen jakaja aloittaa.\
 Insurance on mahdollista ottaa ja se maksaa puolet alkuperäisestä panoksesta.\
-Split on myös mahdollinen ja sen voi ottaa, jos alussa jaettavat kaksi korttia ovat samanlaiset. Splitin aikana voi double down.\
-Double down on myös mahdollista splitin ulkopuolella ja tämä onnistuu, ensimmäisen kahden kortin summa on 9 , 10 tai 11. Sen jälkeen jaetaan 1 kortti ja katsotaan kumpi voittaa.\
+Split mahdollisuus silloin, kun alussa jaettavat kaksi ensimmäistä korttia ovat samat. Splitin aikana on myös mahdollista tehdä double down. Pelaajan on maksettava saman verran mitä alkuperäinenpanos on, jos haluaa tehdä splitin.\
+Double down mahdollista, kun alussa jaettujen korttien summa on 9 , 10 tai 11. \
 Sitten on hit / stand mahdollisuus.\
 Pelin ennätys perustuu siihen paljon oli parhaillaan rahaa pelin aikana.
 
