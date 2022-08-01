@@ -31,6 +31,7 @@ Tämän jälkeen pelaajan on vielä mahdollista ottaa Double down , jos se on ma
 Panokset ovat omat molemmilla käsillä ja ne tarkastetaan erikseen.
 Pelaaja pelaa splitin kädet normaalisti ottamalla lisää kortteja, ellei ole ottanut double down jolloin hänelle on jaettu sille kädelle vain yksi kortti.
 
+
 ## Double down
 Pelaajan kahden ensimmäisen kortin summa on 9 , 10 tai 11. Silloin tarjotaan mahdollisuutta ottaa double down.\
 Double down maksaa saman verran mitä alkuperäinenpanos.\
@@ -50,3 +51,7 @@ niin varmasti huomaa asioita mitkä ois kannattanu tehdä toisin. Kokonaisuutta 
 Kaiken kaikkiaan oli itsestä mukava tämän projektin kanssa tutkia.
 Aikaa tuli kyllä käytettyä omasta mielestä paljonki kyseiseen projektiin vaan tuntui ,että aina löytyi monia erilaisia vaihtoehtoja tehdä asia toisin.
 Monet asiat oli omasta mielestä vähän piilossa ja niitä sai etsiä paljonkin internetin ihmeellisestä maailmasta.
+
+## Video projektista.
+https://user-images.githubusercontent.com/101732234/182104251-273224ba-9125-4d30-8ae6-7dcb342cb48e.mp4
+
